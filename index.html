@@ -1,1 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FUNVEXA — Create • Play • Share</title>
 
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 10% 0%,#ffd8ec 0,transparent 32%),
+    radial-gradient(circle at 90% 10%,#ddd2ff 0,transparent 32%),
+    linear-gradient(160deg,#fff7fb,#f7f3ff);
+  color:#292333;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+}
+
+.app{
+  max-width:520px;
+  min-height:100vh;
+  margin:auto;
+  padding-bottom:95px;
+}
+
+.topbar{
+  padding:22px 18px 10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+
+.logoIcon{
+  width:38px;
+  height:38px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  color:white;
+  font-weight:1000;
+  background:linear-gradient(135deg,#ff5ca8,#9c65ff);
+  box-shadow:0 8px 20px #d48cff55;
+}
+
+.topIcons{
+  display:flex;
+  gap:8px;
+}
+
+.iconBtn{
+  width:40px;
+  height:40px;
+  border-radius:14px;
+  background:#ffffffaa;
+  border:1px solid #ffffff;
+  box-shadow:0 5px 20px #8d6b9d15;
+  font-size:18px;
+}
+
+.hero{
+  margin:15px 16px;
+  padding:24px;
+  border-radius:28px;
+  color:white;
+  background:linear-gradient(135deg,#ff6fae,#a35cff);
+  box-shadow:0 18px 40px #b45cba35;
+  overflow:hidden;
+  position:relative;
+}
+
+.hero:after{
+  content:"✦";
+  position:absolute;
+  right:22px;
+  top:14px;
+  font-size:42px;
+  opacity:.4;
+}
+
+.hero h1{
+  font-size:27px;
+  line-height:1.12;
+  max-width:330px;
+}
+
+.hero p{
+  margin-top:10px;
+  opacity:.9;
+  font-size:14px;
+}
+
+.primary{
+  margin-top:18px;
+  padding:13px 19px;
+  border-radius:15px;
+  background:white;
+  color:#a0449b;
+  font-weight:800;
+  box-shadow:0 8px 20px #681d6b25;
+}
+
+.section{
+  padding:8px 16px 0;
+}
+
+.sectionHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:20px 0 12px;
+}
+
+.sectionHead h2{
+  font-size:19px;
+}
+
+.see{
+  color:#a348a0;
+  font-size:13px;
+  font-weight:800;
+}
+
+.games{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.game{
+  padding:17px;
+  min-height:128px;
+  border-radius:22px;
+  background:#ffffffc7;
+  border:1px solid #fff;
+  box-shadow:0 8px 25px #84618d16;
+  transition:.2s;
+}
+
+.game:active{
+  transform:scale(.97);
+}
+
+.gameIcon{
+  font-size:29px;
+  margin-bottom:12px;
+}
+
+.game h3{
+  font-size:16px;
+}
+
+.game p{
+  margin-top:5px;
+  color:#81768d;
+  font-size:12px;
+}
+
+.createCard{
+  margin:16px;
+  padding:18px;
+  border-radius:23px;
+  background:#ffffffbd;
+  border:1px solid #fff;
+  box-shadow:0 8px 25px #84618d14;
+}
+
+.createCard button{
+  width:100%;
+  padding:14px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#ff67a9,#9b63ff);
+  color:white;
+  font-weight:900;
+  font-size:15px;
+}
+
+.explore{
+  display:none;
+}
+
+.explore.active,
+.home.active{
+  display:block;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.bottomNav{
+  position:fixed;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(490px,calc(100% - 22px));
+  padding:9px 7px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:4px;
+  border-radius:24px;
+  background:#ffffffdf;
+  backdrop-filter:blur(18px);
+  border:1px solid #fff;
+  box-shadow:0 10px 35px #74507b25;
+  z-index:50;
+}
+
+.navBtn{
+  padding:8px 2px;
+  border-radius:17px;
+  background:transparent;
+  color:#8b8194;
+  font-size:11px;
+  font-weight:700;
+}
+
+.navBtn span{
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
+}
+
+.navBtn.active{
+  color:#a2449f;
+  background:#f8e8fa;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#24152a55;
+  backdrop-filter:blur(6px);
+  z-index:100;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.sheet{
+  width:min(520px,100%);
+  padding:24px 18px 30px;
+  background:#fffafd;
+  border-radius:28px 28px 0 0;
+  animation:up .25s ease;
+}
+
+@keyframes up{
+  from{transform:translateY(100%)}
+  to{transform:translateY(0)}
+}
+
+.sheet h2{
+  margin-bottom:16px;
+}
+
+.typeGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:11px;
+}
+
+.type{
+  padding:17px;
+  border-radius:18px;
+  background:#f9f2fb;
+  text-align:left;
+  font-weight:800;
+  font-size:14px;
+}
+
+.type small{
+  display:block;
+  color:#8a7e91;
+  margin-top:5px;
+  font-weight:500;
+}
+
+.close{
+  width:100%;
+  margin-top:14px;
+  padding:13px;
+  border-radius:15px;
+  background:#eee8f1;
+  font-weight:800;
+}
+
+.empty{
+  margin:18px 16px;
+  padding:30px 18px;
+  text-align:center;
+  border-radius:22px;
+  background:#ffffffaa;
+  color:#887c91;
+}
+
+.profileBox{
+  margin:18px 16px;
+  padding:24px;
+  text-align:center;
+  border-radius:25px;
+  background:#ffffffc7;
+  border:1px solid white;
+}
+
+.avatar{
+  width:76px;
+  height:76px;
+  margin:auto;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:linear-gradient(135deg,#ff74b1,#9c62ff);
+  color:white;
+  font-size:30px;
+}
+
+.profileBox h2{
+  margin-top:12px;
+}
+
+.profileBox p{
+  color:#8a7d91;
+  font-size:13px;
+  margin-top:4px;
+}
+
+.profileActions{
+  display:grid;
+  gap:10px;
+  margin-top:18px;
+}
+
+.profileActions button{
+  padding:13px;
+  border-radius:15px;
+  background:#f7eef9;
+  font-weight:800;
+  color:#5d4965;
+}
+
+@media(max-width:370px){
+  .games{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="topbar">
+    <div class="logo">
+      <div class="logoIcon">F</div>
+      FUNVEXA
+    </div>
+
+    <div class="topIcons">
+      <button class="iconBtn" onclick="showPage('notifications')">🔔</button>
+      <button class="iconBtn" onclick="showPage('profile')">👤</button>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <section id="home" class="page active">
+
+    <div class="hero">
+      <h1>Turn your ideas into fun & interactive games! 💗</h1>
+      <p>Create • Play • Share</p>
+      <button class="primary" onclick="openCreate()">＋ Create New</button>
+    </div>
+
+    <div class="section">
+      <div class="sectionHead">
+        <h2>Popular Games</h2>
+        <button class="see" onclick="showPage('explore')">See all</button>
+      </div>
+
+      <div class="games">
+
+        <button class="game" onclick="openCreateType('quiz')">
+          <div class="gameIcon">📝</div>
+          <h3>Quiz</h3>
+          <p>Test your friends</p>
+        </button>
+
+        <button class="game" onclick="openCreateType('poll')">
+          <div class="gameIcon">📊</div>
+          <h3>Poll</h3>
+          <p>Ask & vote</p>
+        </button>
+
+        <button class="game" onclick="openCreateType('this-or-that')">
+          <div class="gameIcon">⚡</div>
+          <h3>This or That</h3>
+          <p>Pick one</p>
+        </button>
+
+        <button class="game" onclick="openCreateType('personality')">
+          <div class="gameIcon">💫</div>
+          <h3>Personality</h3>
+          <p>Discover yourself</p>
+        </button>
+
+      </div>
+    </div>
+
+    <div class="createCard">
+      <button onclick="openCreate()">＋ Create something fun</button>
+    </div>
+
+  </section>
+
+
+  <!-- EXPLORE -->
+  <section id="explore" class="page">
+
+    <div class="section">
+      <div class="sectionHead">
+        <h2>Explore Games 🎮</h2>
+      </div>
+
+      <div class="games">
+
+        <button class="game" onclick="openCreateType('quiz')">
+          <div class="gameIcon">📝</div>
+          <h3>Quiz</h3>
+          <p>Challenge your friends</p>
+        </button>
+
+        <button class="game" onclick="openCreateType('poll')">
+          <div class="gameIcon">📊</div>
+          <h3>Poll</h3>
+          <p>Let everyone vote</p>
+        </button>
+
+        <button class="game" onclick="openCreateType('this-or-that')">
+          <div class="gameIcon">⚡</div>
+          <h3>This or That</h3>
+          <p>Choose your side</p>
+        </button>
+
+        <button class="game" onclick="openCreateType('personality')">
+          <div class="gameIcon">💫</div>
+          <h3>Personality Quiz</h3>
+          <p>Find your type</p>
+        </button>
+
+        <button class="game" onclick="openCreateType('would-you-rather')">
+          <div class="gameIcon">🤔</div>
+          <h3>Would You Rather</h3>
+          <p>Make a choice</p>
+        </button>
+
+        <button class="game" onclick="openCreateType('emoji')">
+          <div class="gameIcon">😂</div>
+          <h3>Emoji Challenge</h3>
+          <p>Guess the answer</p>
+        </button>
+
+        <button class="game" onclick="openCreateType('rapid-fire')">
+          <div class="gameIcon">🔥</div>
+          <h3>Rapid Fire</h3>
+          <p>Answer quickly</p>
+        </button>
+
+        <button class="game" onclick="openCreateType('trivia')">
+          <div class="gameIcon">🧠</div>
+          <h3>Trivia Battle</h3>
+          <p>Show your knowledge</p>
+        </button>
+
+        <button class="game" onclick="showPhotoChallenge()">
+          <div class="gameIcon">📸</div>
+          <h3>Photo Challenge</h3>
+          <p>Rate creativity & themes</p>
+        </button>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- NOTIFICATIONS -->
+  <section id="notifications" class="page">
+
+    <div class="section">
+      <div class="sectionHead">
+        <h2>Notifications 🔔</h2>
+      </div>
+
+      <div class="empty">
+        <div style="font-size:40px">✨</div>
+        <h3>No new notifications</h3>
+        <p style="margin-top:7px">
+          New FUNVEXA updates will appear here.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- PROFILE -->
+  <section id="profile" class="page">
+
+    <div class="profileBox">
+
+      <div class="avatar">👤</div>
+
+      <h2>Guest User</h2>
+
+      <p>Create a profile or continue as guest.</p>
+
+      <div class="profileActions">
+        <button onclick="createProfile()">✨ Create Profile</button>
+        <button onclick="ownerLogin()">🔐 Owner Login</button>
+        <button onclick="myCreations()">🎮 My Creations</button>
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottomNav">
+
+  <button class="navBtn active" onclick="nav(this,'home')">
+    <span>⌂</span>
+    Home
+  </button>
+
+  <button class="navBtn" onclick="nav(this,'explore')">
+    <span>🔎</span>
+    Explore
+  </button>
+
+  <button class="navBtn" onclick="openCreate()">
+    <span>＋</span>
+    Create
+  </button>
+
+  <button class="navBtn" onclick="nav(this,'notifications')">
+    <span>🔔</span>
+    Alerts
+  </button>
+
+  <button class="navBtn" onclick="nav(this,'profile')">
+    <span>👤</span>
+    Profile
+  </button>
+
+</nav>
+
+
+<!-- CREATE SHEET -->
+
+<div id="createModal" class="modal">
+
+  <div class="sheet">
+
+    <h2>Create something ✨</h2>
+
+    <div class="typeGrid">
+
+      <button class="type" onclick="startGame('quiz')">
+        📝 Quiz
+        <small>Make your own quiz</small>
+      </button>
+
+      <button class="type" onclick="startGame('poll')">
+        📊 Poll
+        <small>Ask your audience</small>
+      </button>
+
+      <button class="type" onclick="startGame('this-or-that')">
+        ⚡ This or That
+        <small>Choose between two</small>
+      </button>
+
+      <button class="type" onclick="startGame('personality')">
+        💫 Personality
+        <small>Discover your type</small>
+      </button>
+
+      <button class="type" onclick="startGame('would-you-rather')">
+        🤔 Would You Rather
+        <small>Pick your choice</small>
+      </button>
+
+      <button class="type" onclick="startGame('emoji')">
+        😂 Emoji Challenge
+        <small>Guess the answer</small>
+      </button>
+
+      <button class="type" onclick="startGame('rapid-fire')">
+        🔥 Rapid Fire
+        <small>Quick questions</small>
+      </button>
+
+      <button class="type" onclick="startGame('trivia')">
+        🧠 Trivia Battle
+        <small>Test your knowledge</small>
+      </button>
+
+    </div>
+
+    <button class="close" onclick="closeCreate()">Cancel</button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+function showPage(id){
+
+  document.querySelectorAll('.page')
+    .forEach(p=>p.classList.remove('active'));
+
+  const page=document.getElementById(id);
+
+  if(page){
+    page.classList.add('active');
+  }
+
+  document.querySelectorAll('.navBtn')
+    .forEach(b=>b.classList.remove('active'));
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+
+function nav(btn,id){
+
+  document.querySelectorAll('.navBtn')
+    .forEach(b=>b.classList.remove('active'));
+
+  btn.classList.add('active');
+
+  showPage(id);
+}
+
+
+function openCreate(){
+
+  document.getElementById('createModal')
+    .classList.add('show');
+
+}
+
+
+function closeCreate(){
+
+  document.getElementById('createModal')
+    .classList.remove('show');
+
+}
+
+
+function openCreateType(type){
+
+  openCreate();
+
+}
+
+
+function startGame(type){
+
+  closeCreate();
+
+  alert(
+    type.replaceAll('-',' ')
+      .replace(/\b\w/g,c=>c.toUpperCase())
+      +" creator will open in the next step."
+  );
+
+}
+
+
+function createProfile(){
+
+  alert("Profile creation will be connected in the next update.");
+}
+
+
+function ownerLogin(){
+
+  alert("Owner Login will open here.");
+}
+
+
+function myCreations(){
+
+  alert("Your creations will appear here.");
+}
+
+
+function showPhotoChallenge(){
+
+  alert(
+    "Photo Challenge: share creative photos and let the community rate the theme/creativity."
+  );
+
+}
+
+document.getElementById('createModal')
+.addEventListener('click',function(e){
+
+  if(e.target===this){
+    closeCreate();
+  }
+
+});
+
+</script>
+
+</body>
+</html>
