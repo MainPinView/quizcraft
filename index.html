@@ -2,752 +2,714 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>FUNVEXA — Create • Play • Share</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-
-body{
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 10% 0%,#ffd8ec 0,transparent 32%),
-    radial-gradient(circle at 90% 10%,#ddd2ff 0,transparent 32%),
-    linear-gradient(160deg,#fff7fb,#f7f3ff);
-  color:#292333;
-}
-
-button{
-  border:0;
-  cursor:pointer;
-}
-
-.app{
-  max-width:520px;
-  min-height:100vh;
-  margin:auto;
-  padding-bottom:95px;
-}
-
-.topbar{
-  padding:22px 18px 10px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  font-size:24px;
-  font-weight:900;
-  letter-spacing:-1px;
-}
-
-.logoIcon{
-  width:38px;
-  height:38px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  color:white;
-  font-weight:1000;
-  background:linear-gradient(135deg,#ff5ca8,#9c65ff);
-  box-shadow:0 8px 20px #d48cff55;
-}
-
-.topIcons{
-  display:flex;
-  gap:8px;
-}
-
-.iconBtn{
-  width:40px;
-  height:40px;
-  border-radius:14px;
-  background:#ffffffaa;
-  border:1px solid #ffffff;
-  box-shadow:0 5px 20px #8d6b9d15;
-  font-size:18px;
-}
-
-.hero{
-  margin:15px 16px;
-  padding:24px;
-  border-radius:28px;
-  color:white;
-  background:linear-gradient(135deg,#ff6fae,#a35cff);
-  box-shadow:0 18px 40px #b45cba35;
-  overflow:hidden;
-  position:relative;
-}
-
-.hero:after{
-  content:"✦";
-  position:absolute;
-  right:22px;
-  top:14px;
-  font-size:42px;
-  opacity:.4;
-}
-
-.hero h1{
-  font-size:27px;
-  line-height:1.12;
-  max-width:330px;
-}
-
-.hero p{
-  margin-top:10px;
-  opacity:.9;
-  font-size:14px;
-}
-
-.primary{
-  margin-top:18px;
-  padding:13px 19px;
-  border-radius:15px;
-  background:white;
-  color:#a0449b;
-  font-weight:800;
-  box-shadow:0 8px 20px #681d6b25;
-}
-
-.section{
-  padding:8px 16px 0;
-}
-
-.sectionHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:20px 0 12px;
-}
-
-.sectionHead h2{
-  font-size:19px;
-}
-
-.see{
-  color:#a348a0;
-  font-size:13px;
-  font-weight:800;
-}
-
-.games{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.game{
-  padding:17px;
-  min-height:128px;
-  border-radius:22px;
-  background:#ffffffc7;
-  border:1px solid #fff;
-  box-shadow:0 8px 25px #84618d16;
-  transition:.2s;
-}
-
-.game:active{
-  transform:scale(.97);
-}
-
-.gameIcon{
-  font-size:29px;
-  margin-bottom:12px;
-}
-
-.game h3{
-  font-size:16px;
-}
-
-.game p{
-  margin-top:5px;
-  color:#81768d;
-  font-size:12px;
-}
-
-.createCard{
-  margin:16px;
-  padding:18px;
-  border-radius:23px;
-  background:#ffffffbd;
-  border:1px solid #fff;
-  box-shadow:0 8px 25px #84618d14;
-}
-
-.createCard button{
-  width:100%;
-  padding:14px;
-  border-radius:15px;
-  background:linear-gradient(135deg,#ff67a9,#9b63ff);
-  color:white;
-  font-weight:900;
-  font-size:15px;
-}
-
-.explore{
-  display:none;
-}
-
-.explore.active,
-.home.active{
-  display:block;
-}
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-.bottomNav{
-  position:fixed;
-  bottom:12px;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(490px,calc(100% - 22px));
-  padding:9px 7px;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:4px;
-  border-radius:24px;
-  background:#ffffffdf;
-  backdrop-filter:blur(18px);
-  border:1px solid #fff;
-  box-shadow:0 10px 35px #74507b25;
-  z-index:50;
-}
-
-.navBtn{
-  padding:8px 2px;
-  border-radius:17px;
-  background:transparent;
-  color:#8b8194;
-  font-size:11px;
-  font-weight:700;
-}
-
-.navBtn span{
-  display:block;
-  font-size:20px;
-  margin-bottom:3px;
-}
-
-.navBtn.active{
-  color:#a2449f;
-  background:#f8e8fa;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#24152a55;
-  backdrop-filter:blur(6px);
-  z-index:100;
-  align-items:flex-end;
-  justify-content:center;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.sheet{
-  width:min(520px,100%);
-  padding:24px 18px 30px;
-  background:#fffafd;
-  border-radius:28px 28px 0 0;
-  animation:up .25s ease;
-}
-
-@keyframes up{
-  from{transform:translateY(100%)}
-  to{transform:translateY(0)}
-}
-
-.sheet h2{
-  margin-bottom:16px;
-}
-
-.typeGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:11px;
-}
-
-.type{
-  padding:17px;
-  border-radius:18px;
-  background:#f9f2fb;
-  text-align:left;
-  font-weight:800;
-  font-size:14px;
-}
-
-.type small{
-  display:block;
-  color:#8a7e91;
-  margin-top:5px;
-  font-weight:500;
-}
-
-.close{
-  width:100%;
-  margin-top:14px;
-  padding:13px;
-  border-radius:15px;
-  background:#eee8f1;
-  font-weight:800;
-}
-
-.empty{
-  margin:18px 16px;
-  padding:30px 18px;
-  text-align:center;
-  border-radius:22px;
-  background:#ffffffaa;
-  color:#887c91;
-}
-
-.profileBox{
-  margin:18px 16px;
-  padding:24px;
-  text-align:center;
-  border-radius:25px;
-  background:#ffffffc7;
-  border:1px solid white;
-}
-
-.avatar{
-  width:76px;
-  height:76px;
-  margin:auto;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:linear-gradient(135deg,#ff74b1,#9c62ff);
-  color:white;
-  font-size:30px;
-}
-
-.profileBox h2{
-  margin-top:12px;
-}
-
-.profileBox p{
-  color:#8a7d91;
-  font-size:13px;
-  margin-top:4px;
-}
-
-.profileActions{
-  display:grid;
-  gap:10px;
-  margin-top:18px;
-}
-
-.profileActions button{
-  padding:13px;
-  border-radius:15px;
-  background:#f7eef9;
-  font-weight:800;
-  color:#5d4965;
-}
-
-@media(max-width:370px){
-  .games{
-    grid-template-columns:1fr;
-  }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#fff3fb;color:#21182b}
+body{min-height:100vh}
+button,input,textarea{font:inherit}
+button{border:0;cursor:pointer}
+.app{max-width:760px;margin:auto;min-height:100vh;background:linear-gradient(145deg,#fff,#fff0fa 55%,#f4eaff);padding-bottom:90px}
+.topbar{height:70px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;background:rgba(255,244,252,.9);backdrop-filter:blur(12px)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;color:#6331c9}
+.logoIcon{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#ff4ca5,#7135e8);display:grid;place-items:center;color:white;font-size:24px;box-shadow:0 8px 22px #c987dc66}
+.topActions{display:flex;gap:10px}
+.iconBtn{width:42px;height:42px;border-radius:14px;background:white;box-shadow:0 4px 15px #d9b8d955;font-size:20px}
+.page{display:none;padding:18px}
+.page.active{display:block}
+.hero{text-align:center;padding:28px 12px 25px}
+.heroLogo{width:150px;height:150px;border-radius:38px;margin:auto;background:linear-gradient(145deg,#fff,#fcecff);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 18px 40px #d7a9df55}
+.heroLogo .bigF{font-size:65px;font-weight:1000;background:linear-gradient(135deg,#ff299a,#6a25df);-webkit-background-clip:text;color:transparent}
+.heroLogo strong{font-size:19px;color:#5b20b9}
+.heroLogo small{font-size:8px;color:#7b6680;margin-top:3px}
+.hero h1{font-size:48px;margin:25px 0 8px;letter-spacing:-2px}
+.hero p{font-size:20px;color:#78677e;margin:0}
+.card{background:rgba(255,255,255,.85);border-radius:30px;padding:25px;box-shadow:0 12px 35px #d8afd955;margin:16px 0}
+.card h2{margin:0 0 12px;font-size:26px}
+.card p{color:#756778;line-height:1.5}
+.primary{width:100%;padding:18px;border-radius:22px;background:linear-gradient(90deg,#ff43a4,#b42eea);color:white;font-weight:900;font-size:19px;box-shadow:0 10px 25px #ee62af55}
+.secondary{padding:13px 18px;border-radius:15px;background:#f1e3ff;color:#6222bd;font-weight:800}
+.gamesTitle{display:flex;justify-content:space-between;align-items:center;margin:30px 5px 14px}
+.gamesTitle h2{margin:0;font-size:24px}
+.gamesTitle span{color:#8d6c91}
+.games{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.game{background:white;border-radius:24px;padding:22px;min-height:165px;box-shadow:0 8px 24px #d8afd933;transition:.2s}
+.game:active{transform:scale(.97)}
+.gameIcon{width:52px;height:52px;border-radius:17px;background:#f0ddff;display:grid;place-items:center;font-size:27px;margin-bottom:15px}
+.game h3{margin:0 0 8px;font-size:18px}
+.game p{margin:0;color:#7c6a81;font-size:14px;line-height:1.4}
+.bottomNav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(760px,100%);height:76px;background:rgba(255,255,255,.94);backdrop-filter:blur(15px);display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid #ead9ed;z-index:20}
+.navBtn{background:transparent;color:#8a748f;font-size:12px;font-weight:700}
+.navBtn b{display:block;font-size:21px;margin-bottom:3px}
+.navBtn.active{color:#a72fd7}
+.modal{position:fixed;inset:0;background:#1e102666;z-index:50;display:none;align-items:flex-end}
+.modal.show{display:flex}
+.sheet{width:min(760px,100%);max-height:92vh;overflow:auto;background:#fff8fd;border-radius:32px 32px 0 0;padding:25px}
+.sheetHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.sheetHead h2{margin:0}
+.close{width:40px;height:40px;border-radius:14px;background:#f0e2f3}
+.formGroup{margin:15px 0}
+.formGroup label{display:block;font-weight:800;margin-bottom:8px}
+.input,.textarea{width:100%;padding:15px;border:2px solid #ead9ef;border-radius:16px;background:white;outline:none}
+.input:focus,.textarea:focus{border-color:#b43ee4}
+.textarea{min-height:90px;resize:vertical}
+.questionBox{background:white;border-radius:22px;padding:18px;margin:15px 0;box-shadow:0 5px 20px #d8afd933}
+.questionTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.questionTop strong{color:#762ac7}
+.removeQ{background:#ffe3ef;color:#c32968;border-radius:10px;padding:7px 10px;font-size:12px;font-weight:bold}
+.optionRow{display:flex;gap:8px;margin:8px 0}
+.optionRow input{flex:1}
+.optionRemove{width:42px;border-radius:12px;background:#f7e8f5}
+.actions{display:flex;gap:10px;margin-top:15px}
+.actions button{flex:1}
+.shareBox{text-align:center;background:linear-gradient(145deg,#fff,#f8eaff);border-radius:24px;padding:25px}
+.shareUrl{background:white;border-radius:15px;padding:14px;word-break:break-all;color:#6b32bf;font-size:13px;margin:15px 0}
+.empty{text-align:center;padding:40px 20px;color:#7b687e}
+.responseCard{background:white;border-radius:20px;padding:18px;margin:12px 0;box-shadow:0 5px 20px #d8afd933}
+.responseCard strong{font-size:18px}
+.answerLine{padding:10px 0;border-bottom:1px solid #eee4f0;font-size:14px}
+.answerLine:last-child{border-bottom:0}
+.toast{position:fixed;left:50%;bottom:95px;transform:translateX(-50%);background:#25152c;color:white;padding:13px 18px;border-radius:15px;z-index:100;display:none;font-size:14px}
+.toast.show{display:block}
+.back{background:#f0e3f5;border-radius:13px;padding:10px 14px;font-weight:bold;margin-bottom:15px}
+.small{font-size:13px;color:#8a778d}
+@media(max-width:500px){
+.hero h1{font-size:42px}
+.games{gap:12px}
+.game{padding:17px;min-height:150px}
+.card{padding:21px}
 }
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
-  <div class="topbar">
-    <div class="logo">
-      <div class="logoIcon">F</div>
-      FUNVEXA
-    </div>
+<header class="topbar">
+  <div class="logo"><div class="logoIcon">F</div> FUNVEXA</div>
+  <div class="topActions">
+    <button class="iconBtn" onclick="showPage('alerts')">🔔</button>
+    <button class="iconBtn" onclick="showPage('profile')">♙</button>
+  </div>
+</header>
 
-    <div class="topIcons">
-      <button class="iconBtn" onclick="showPage('notifications')">🔔</button>
-      <button class="iconBtn" onclick="showPage('profile')">👤</button>
+<!-- HOME -->
+<section id="home" class="page active">
+  <div class="hero">
+    <div class="heroLogo">
+      <div class="bigF">F</div>
+      <strong>FUNVEXA</strong>
+      <small>Create • Play • Share</small>
     </div>
+    <h1>FUNVEXA</h1>
+    <p>Create • Play • Share</p>
   </div>
 
-  <!-- HOME -->
-  <section id="home" class="page active">
+  <div class="card">
+    <h2>Turn your ideas into fun & interactive games! 💗</h2>
+    <p>Quizzes, polls, personality tests aur more — create karo, share karo aur friends ke saath play karo.</p>
+    <button class="primary" onclick="openCreate()">＋ Create New</button>
+  </div>
 
-    <div class="hero">
-      <h1>Turn your ideas into fun & interactive games! 💗</h1>
-      <p>Create • Play • Share</p>
-      <button class="primary" onclick="openCreate()">＋ Create New</button>
+  <div class="gamesTitle"><h2>Popular games</h2><span>Top 4</span></div>
+
+  <div class="games">
+    <div class="game" onclick="startGame('quiz')"><div class="gameIcon">📝</div><h3>Quiz</h3><p>Test your knowledge</p></div>
+    <div class="game" onclick="startGame('poll')"><div class="gameIcon">📊</div><h3>Poll</h3><p>Ask & get opinions</p></div>
+    <div class="game" onclick="startGame('this-or-that')"><div class="gameIcon">⚡</div><h3>This or That</h3><p>Choose your side</p></div>
+    <div class="game" onclick="startGame('personality')"><div class="gameIcon">💫</div><h3>Personality</h3><p>Discover yourself</p></div>
+  </div>
+</section>
+
+<!-- EXPLORE -->
+<section id="explore" class="page">
+  <div class="card">
+    <h2>Explore FUNVEXA 🎮</h2>
+    <p>Choose a game and start creating.</p>
+  </div>
+
+  <div class="games">
+    <div class="game" onclick="startGame('quiz')"><div class="gameIcon">📝</div><h3>Quiz</h3><p>Test knowledge</p></div>
+    <div class="game" onclick="startGame('poll')"><div class="gameIcon">📊</div><h3>Poll</h3><p>Get opinions</p></div>
+    <div class="game" onclick="startGame('this-or-that')"><div class="gameIcon">⚡</div><h3>This or That</h3><p>Pick one</p></div>
+    <div class="game" onclick="startGame('personality')"><div class="gameIcon">💫</div><h3>Personality Quiz</h3><p>Discover yourself</p></div>
+    <div class="game" onclick="startGame('would-you-rather')"><div class="gameIcon">🤔</div><h3>Would You Rather</h3><p>Choose your option</p></div>
+    <div class="game" onclick="startGame('emoji')"><div class="gameIcon">😂</div><h3>Emoji Challenge</h3><p>Guess the answer</p></div>
+    <div class="game" onclick="startGame('rapid')"><div class="gameIcon">🔥</div><h3>Rapid Fire</h3><p>Answer quickly</p></div>
+    <div class="game" onclick="startGame('trivia')"><div class="gameIcon">🧠</div><h3>Trivia Battle</h3><p>Challenge friends</p></div>
+  </div>
+</section>
+
+<!-- CREATE -->
+<section id="create" class="page">
+  <div class="card">
+    <h2>Create something fun ✨</h2>
+    <p>Make a quiz, poll or one of the upcoming FUNVEXA games.</p>
+    <button class="primary" onclick="openCreate()">＋ Choose Game</button>
+  </div>
+</section>
+
+<!-- ALERTS -->
+<section id="alerts" class="page">
+  <div class="card">
+    <h2>Notifications 🔔</h2>
+    <div class="empty">
+      <div style="font-size:45px">🔔</div>
+      <h3>No new notifications</h3>
+      <p>New FUNVEXA updates will appear here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile" class="page">
+  <div class="card">
+    <h2>Profile 👤</h2>
+    <div style="text-align:center;padding:15px">
+      <div style="font-size:60px">🙂</div>
+      <h3>Guest User</h3>
+      <p class="small">You can create games without making an account.</p>
+    </div>
+    <button class="secondary" style="width:100%;margin:6px 0" onclick="myCreations()">My Creations</button>
+    <button class="secondary" style="width:100%;margin:6px 0" onclick="ownerLogin()">Owner Login</button>
+  </div>
+</section>
+
+<!-- QUIZ CREATOR -->
+<section id="creator" class="page">
+  <button class="back" onclick="showPage('home')">← Back</button>
+
+  <div class="card">
+    <h2>Create Quiz 📝</h2>
+    <p class="small">Create your questions, then generate a private share link.</p>
+
+    <div class="formGroup">
+      <label>Quiz title</label>
+      <input id="quizTitle" class="input" placeholder="e.g. How well do you know me?">
     </div>
 
-    <div class="section">
-      <div class="sectionHead">
-        <h2>Popular Games</h2>
-        <button class="see" onclick="showPage('explore')">See all</button>
-      </div>
+    <div id="questions"></div>
 
-      <div class="games">
+    <button class="secondary" style="width:100%" onclick="addQuestion()">＋ Add Question</button>
 
-        <button class="game" onclick="openCreateType('quiz')">
-          <div class="gameIcon">📝</div>
-          <h3>Quiz</h3>
-          <p>Test your friends</p>
-        </button>
+    <div style="height:12px"></div>
+    <button class="primary" onclick="publishQuiz()">🚀 Create & Get Share Link</button>
+  </div>
+</section>
 
-        <button class="game" onclick="openCreateType('poll')">
-          <div class="gameIcon">📊</div>
-          <h3>Poll</h3>
-          <p>Ask & vote</p>
-        </button>
-
-        <button class="game" onclick="openCreateType('this-or-that')">
-          <div class="gameIcon">⚡</div>
-          <h3>This or That</h3>
-          <p>Pick one</p>
-        </button>
-
-        <button class="game" onclick="openCreateType('personality')">
-          <div class="gameIcon">💫</div>
-          <h3>Personality</h3>
-          <p>Discover yourself</p>
-        </button>
-
-      </div>
+<!-- SHARE -->
+<section id="share" class="page">
+  <div class="card">
+    <div class="shareBox">
+      <div style="font-size:55px">🎉</div>
+      <h2>Quiz Created!</h2>
+      <p>Send this link to your friends.</p>
+      <div id="shareUrl" class="shareUrl"></div>
+      <button class="primary" onclick="copyShare()">📋 Copy Link</button>
+      <div style="height:10px"></div>
+      <button class="secondary" onclick="showPage('home')">Done</button>
     </div>
+  </div>
+</section>
 
-    <div class="createCard">
-      <button onclick="openCreate()">＋ Create something fun</button>
+<!-- RESPONSES -->
+<section id="responses" class="page">
+  <button class="back" onclick="showPage('profile')">← Back</button>
+  <div class="card">
+    <h2>My Responses 👀</h2>
+    <div id="responseList" class="empty">Loading...</div>
+  </div>
+</section>
+
+<!-- PLAY QUIZ -->
+<section id="play" class="page">
+  <button class="back" onclick="leaveQuiz()">← Exit</button>
+  <div class="card">
+    <h2 id="playTitle">Quiz</h2>
+    <div class="formGroup">
+      <label>Your name</label>
+      <input id="playerName" class="input" placeholder="Enter your name">
     </div>
-
-  </section>
-
-
-  <!-- EXPLORE -->
-  <section id="explore" class="page">
-
-    <div class="section">
-      <div class="sectionHead">
-        <h2>Explore Games 🎮</h2>
-      </div>
-
-      <div class="games">
-
-        <button class="game" onclick="openCreateType('quiz')">
-          <div class="gameIcon">📝</div>
-          <h3>Quiz</h3>
-          <p>Challenge your friends</p>
-        </button>
-
-        <button class="game" onclick="openCreateType('poll')">
-          <div class="gameIcon">📊</div>
-          <h3>Poll</h3>
-          <p>Let everyone vote</p>
-        </button>
-
-        <button class="game" onclick="openCreateType('this-or-that')">
-          <div class="gameIcon">⚡</div>
-          <h3>This or That</h3>
-          <p>Choose your side</p>
-        </button>
-
-        <button class="game" onclick="openCreateType('personality')">
-          <div class="gameIcon">💫</div>
-          <h3>Personality Quiz</h3>
-          <p>Find your type</p>
-        </button>
-
-        <button class="game" onclick="openCreateType('would-you-rather')">
-          <div class="gameIcon">🤔</div>
-          <h3>Would You Rather</h3>
-          <p>Make a choice</p>
-        </button>
-
-        <button class="game" onclick="openCreateType('emoji')">
-          <div class="gameIcon">😂</div>
-          <h3>Emoji Challenge</h3>
-          <p>Guess the answer</p>
-        </button>
-
-        <button class="game" onclick="openCreateType('rapid-fire')">
-          <div class="gameIcon">🔥</div>
-          <h3>Rapid Fire</h3>
-          <p>Answer quickly</p>
-        </button>
-
-        <button class="game" onclick="openCreateType('trivia')">
-          <div class="gameIcon">🧠</div>
-          <h3>Trivia Battle</h3>
-          <p>Show your knowledge</p>
-        </button>
-
-        <button class="game" onclick="showPhotoChallenge()">
-          <div class="gameIcon">📸</div>
-          <h3>Photo Challenge</h3>
-          <p>Rate creativity & themes</p>
-        </button>
-
-      </div>
-    </div>
-
-  </section>
-
-
-  <!-- NOTIFICATIONS -->
-  <section id="notifications" class="page">
-
-    <div class="section">
-      <div class="sectionHead">
-        <h2>Notifications 🔔</h2>
-      </div>
-
-      <div class="empty">
-        <div style="font-size:40px">✨</div>
-        <h3>No new notifications</h3>
-        <p style="margin-top:7px">
-          New FUNVEXA updates will appear here.
-        </p>
-      </div>
-    </div>
-
-  </section>
-
-
-  <!-- PROFILE -->
-  <section id="profile" class="page">
-
-    <div class="profileBox">
-
-      <div class="avatar">👤</div>
-
-      <h2>Guest User</h2>
-
-      <p>Create a profile or continue as guest.</p>
-
-      <div class="profileActions">
-        <button onclick="createProfile()">✨ Create Profile</button>
-        <button onclick="ownerLogin()">🔐 Owner Login</button>
-        <button onclick="myCreations()">🎮 My Creations</button>
-      </div>
-
-    </div>
-
-  </section>
-
-</div>
-
-
-<!-- BOTTOM NAV -->
-
-<nav class="bottomNav">
-
-  <button class="navBtn active" onclick="nav(this,'home')">
-    <span>⌂</span>
-    Home
-  </button>
-
-  <button class="navBtn" onclick="nav(this,'explore')">
-    <span>🔎</span>
-    Explore
-  </button>
-
-  <button class="navBtn" onclick="openCreate()">
-    <span>＋</span>
-    Create
-  </button>
-
-  <button class="navBtn" onclick="nav(this,'notifications')">
-    <span>🔔</span>
-    Alerts
-  </button>
-
-  <button class="navBtn" onclick="nav(this,'profile')">
-    <span>👤</span>
-    Profile
-  </button>
-
-</nav>
-
-
-<!-- CREATE SHEET -->
+    <div id="playQuestions"></div>
+    <button class="primary" onclick="submitQuiz()">Submit Answers 🚀</button>
+  </div>
+</section>
 
 <div id="createModal" class="modal">
-
   <div class="sheet">
-
-    <h2>Create something ✨</h2>
-
-    <div class="typeGrid">
-
-      <button class="type" onclick="startGame('quiz')">
-        📝 Quiz
-        <small>Make your own quiz</small>
-      </button>
-
-      <button class="type" onclick="startGame('poll')">
-        📊 Poll
-        <small>Ask your audience</small>
-      </button>
-
-      <button class="type" onclick="startGame('this-or-that')">
-        ⚡ This or That
-        <small>Choose between two</small>
-      </button>
-
-      <button class="type" onclick="startGame('personality')">
-        💫 Personality
-        <small>Discover your type</small>
-      </button>
-
-      <button class="type" onclick="startGame('would-you-rather')">
-        🤔 Would You Rather
-        <small>Pick your choice</small>
-      </button>
-
-      <button class="type" onclick="startGame('emoji')">
-        😂 Emoji Challenge
-        <small>Guess the answer</small>
-      </button>
-
-      <button class="type" onclick="startGame('rapid-fire')">
-        🔥 Rapid Fire
-        <small>Quick questions</small>
-      </button>
-
-      <button class="type" onclick="startGame('trivia')">
-        🧠 Trivia Battle
-        <small>Test your knowledge</small>
-      </button>
-
+    <div class="sheetHead">
+      <h2>Choose a game</h2>
+      <button class="close" onclick="closeCreate()">✕</button>
     </div>
 
-    <button class="close" onclick="closeCreate()">Cancel</button>
-
+    <div class="games">
+      <div class="game" onclick="startGame('quiz')"><div class="gameIcon">📝</div><h3>Quiz</h3><p>Create questions</p></div>
+      <div class="game" onclick="startGame('poll')"><div class="gameIcon">📊</div><h3>Poll</h3><p>Ask opinions</p></div>
+      <div class="game" onclick="startGame('this-or-that')"><div class="gameIcon">⚡</div><h3>This or That</h3><p>Pick one</p></div>
+      <div class="game" onclick="startGame('personality')"><div class="gameIcon">💫</div><h3>Personality</h3><p>Coming next</p></div>
+    </div>
   </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<nav class="bottomNav">
+  <button class="navBtn active" onclick="nav(this,'home')"><b>⌂</b>Home</button>
+  <button class="navBtn" onclick="nav(this,'explore')"><b>⌕</b>Explore</button>
+  <button class="navBtn" onclick="nav(this,'create')"><b>＋</b>Create</button>
+  <button class="navBtn" onclick="nav(this,'alerts')"><b>♢</b>Alerts</button>
+  <button class="navBtn" onclick="nav(this,'profile')"><b>♙</b>Profile</button>
+</nav>
 
 </div>
 
-
 <script>
+const SUPABASE_URL = "https://rzbcofckfgnurhnxmgbl.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_WPGUUlCUn52sH3rvaYoAgg_MCIeDkYZ";
 
-function showPage(id){
-
-  document.querySelectorAll('.page')
-    .forEach(p=>p.classList.remove('active'));
-
-  const page=document.getElementById(id);
-
-  if(page){
-    page.classList.add('active');
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY,
+  {
+    auth:{
+      persistSession:true,
+      autoRefreshToken:true,
+      detectSessionInUrl:false
+    }
   }
+);
 
-  document.querySelectorAll('.navBtn')
-    .forEach(b=>b.classList.remove('active'));
+let currentUser = null;
+let currentQuiz = null;
+let lastQuizId = null;
 
-  window.scrollTo({top:0,behavior:'smooth'});
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2500);
 }
 
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  const el=document.getElementById(id);
+  if(el)el.classList.add("active");
+  window.scrollTo(0,0);
+}
 
 function nav(btn,id){
-
-  document.querySelectorAll('.navBtn')
-    .forEach(b=>b.classList.remove('active'));
-
-  btn.classList.add('active');
-
+  document.querySelectorAll(".navBtn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
   showPage(id);
 }
 
-
 function openCreate(){
-
-  document.getElementById('createModal')
-    .classList.add('show');
-
+  document.getElementById("createModal").classList.add("show");
 }
-
 
 function closeCreate(){
-
-  document.getElementById('createModal')
-    .classList.remove('show');
-
+  document.getElementById("createModal").classList.remove("show");
 }
-
-
-function openCreateType(type){
-
-  openCreate();
-
-}
-
 
 function startGame(type){
-
   closeCreate();
 
-  alert(
-    type.replaceAll('-',' ')
-      .replace(/\b\w/g,c=>c.toUpperCase())
-      +" creator will open in the next step."
-  );
-
-}
-
-
-function createProfile(){
-
-  alert("Profile creation will be connected in the next update.");
-}
-
-
-function ownerLogin(){
-
-  alert("Owner Login will open here.");
-}
-
-
-function myCreations(){
-
-  alert("Your creations will appear here.");
-}
-
-
-function showPhotoChallenge(){
-
-  alert(
-    "Photo Challenge: share creative photos and let the community rate the theme/creativity."
-  );
-
-}
-
-document.getElementById('createModal')
-.addEventListener('click',function(e){
-
-  if(e.target===this){
-    closeCreate();
+  if(type==="quiz"){
+    openQuizCreator();
+    return;
   }
 
-});
+  toast(type.replaceAll("-"," ").replace(/\b\w/g,c=>c.toUpperCase())+" is coming next ✨");
+}
 
+async function ensureAnonymousUser(){
+  const {data:{session}} = await supabaseClient.auth.getSession();
+
+  if(session?.user){
+    currentUser=session.user;
+    return true;
+  }
+
+  const {data,error}=await supabaseClient.auth.signInAnonymously();
+
+  if(error){
+    console.error(error);
+    toast("Anonymous sign-in is not enabled in Supabase.");
+    return false;
+  }
+
+  currentUser=data.user;
+  return true;
+}
+
+function openQuizCreator(){
+  document.getElementById("quizTitle").value="";
+  document.getElementById("questions").innerHTML="";
+  addQuestion();
+  showPage("creator");
+}
+
+function addQuestion(){
+  const box=document.createElement("div");
+  box.className="questionBox";
+
+  const index=document.querySelectorAll(".questionBox").length+1;
+
+  box.innerHTML=`
+    <div class="questionTop">
+      <strong>Question ${index}</strong>
+      <button class="removeQ" onclick="removeQuestion(this)">Remove</button>
+    </div>
+
+    <input class="input qText" placeholder="Write your question">
+
+    <div class="formGroup">
+      <label>Options</label>
+      <div class="optionRow">
+        <input class="input option" placeholder="Option 1">
+        <button class="optionRemove" onclick="this.parentElement.remove()">×</button>
+      </div>
+      <div class="optionRow">
+        <input class="input option" placeholder="Option 2">
+        <button class="optionRemove" onclick="this.parentElement.remove()">×</button>
+      </div>
+    </div>
+
+    <button class="secondary" onclick="addOption(this)">＋ Add Option</button>
+  `;
+
+  document.getElementById("questions").appendChild(box);
+  renumberQuestions();
+}
+
+function addOption(btn){
+  const group=btn.previousElementSibling;
+  const row=document.createElement("div");
+  row.className="optionRow";
+
+  row.innerHTML=`
+    <input class="input option" placeholder="Another option">
+    <button class="optionRemove" onclick="this.parentElement.remove()">×</button>
+  `;
+
+  group.appendChild(row);
+}
+
+function removeQuestion(btn){
+  btn.closest(".questionBox").remove();
+  renumberQuestions();
+}
+
+function renumberQuestions(){
+  document.querySelectorAll(".questionBox").forEach((box,i)=>{
+    box.querySelector(".questionTop strong").textContent="Question "+(i+1);
+  });
+}
+
+function collectQuiz(){
+  const title=document.getElementById("quizTitle").value.trim();
+
+  if(!title){
+    toast("Quiz title likho.");
+    return null;
+  }
+
+  const boxes=[...document.querySelectorAll(".questionBox")];
+
+  if(!boxes.length){
+    toast("At least one question add karo.");
+    return null;
+  }
+
+  const questions=[];
+
+  for(const box of boxes){
+    const text=box.querySelector(".qText").value.trim();
+    const options=[...box.querySelectorAll(".option")]
+      .map(x=>x.value.trim())
+      .filter(Boolean);
+
+    if(!text){
+      toast("Har question mein question likho.");
+      return null;
+    }
+
+    if(options.length<2){
+      toast("Har question mein kam se kam 2 options chahiye.");
+      return null;
+    }
+
+    questions.push({
+      text,
+      options
+    });
+  }
+
+  return {title,questions};
+}
+
+function encodeQuiz(obj){
+  return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
+}
+
+function decodeQuiz(str){
+  try{
+    return JSON.parse(decodeURIComponent(escape(atob(str))));
+  }catch(e){
+    return null;
+  }
+}
+
+async function publishQuiz(){
+  const quiz=collectQuiz();
+  if(!quiz)return;
+
+  const ok=await ensureAnonymousUser();
+  if(!ok)return;
+
+  const quizId=
+    Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,12);
+
+  const {error}=await supabaseClient
+    .from("quizzes")
+    .insert({
+      id:quizId,
+      owner_id:currentUser.id,
+      title:quiz.title
+    });
+
+  if(error){
+    console.error(error);
+    toast("Quiz save nahi hua. Supabase policies check karo.");
+    return;
+  }
+
+  const encoded=encodeQuiz({
+    id:quizId,
+    title:quiz.title,
+    questions:quiz.questions
+  });
+
+  const url=
+    window.location.origin+
+    window.location.pathname+
+    "#quiz="+encoded;
+
+  lastQuizId=quizId;
+
+  document.getElementById("shareUrl").textContent=url;
+  showPage("share");
+}
+
+async function copyShare(){
+  const url=document.getElementById("shareUrl").textContent;
+
+  try{
+    await navigator.clipboard.writeText(url);
+    toast("Link copied! 🔗");
+  }catch(e){
+    toast("Link ko long-press karke copy karo.");
+  }
+}
+
+function loadSharedQuiz(){
+  const hash=window.location.hash;
+
+  if(!hash.startsWith("#quiz="))return;
+
+  const encoded=hash.substring(6);
+  const quiz=decodeQuiz(encoded);
+
+  if(!quiz || !quiz.questions){
+    toast("Quiz link invalid hai.");
+    return;
+  }
+
+  currentQuiz=quiz;
+
+  document.getElementById("playTitle").textContent=quiz.title;
+
+  const container=document.getElementById("playQuestions");
+  container.innerHTML="";
+
+  quiz.questions.forEach((q,i)=>{
+    const box=document.createElement("div");
+    box.className="questionBox";
+
+    let options="";
+
+    q.options.forEach((opt,j)=>{
+      options+=`
+        <label style="display:block;background:#faf4ff;border-radius:13px;padding:12px;margin:8px 0">
+          <input type="radio" name="q${i}" value="${escapeHtml(opt)}">
+          ${escapeHtml(opt)}
+        </label>
+      `;
+    });
+
+    box.innerHTML=`
+      <strong>Q${i+1}. ${escapeHtml(q.text)}</strong>
+      <div style="margin-top:12px">${options}</div>
+    `;
+
+    container.appendChild(box);
+  });
+
+  showPage("play");
+}
+
+function escapeHtml(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+async function submitQuiz(){
+  if(!currentQuiz){
+    toast("Quiz load nahi hua.");
+    return;
+  }
+
+  const name=document.getElementById("playerName").value.trim();
+
+  if(!name){
+    toast("Apna naam likho.");
+    return;
+  }
+
+  const answers=[];
+
+  for(let i=0;i<currentQuiz.questions.length;i++){
+    const selected=document.querySelector(`input[name="q${i}"]:checked`);
+
+    if(!selected){
+      toast("Q"+(i+1)+" ka answer select karo.");
+      return;
+    }
+
+    answers.push(selected.value);
+  }
+
+  const {error}=await supabaseClient
+    .from("responses")
+    .insert({
+      quiz_id:currentQuiz.id,
+      name:name,
+      answers:answers
+    });
+
+  if(error){
+    console.error(error);
+    toast("Response save nahi hua.");
+    return;
+  }
+
+  document.getElementById("playQuestions").innerHTML=`
+    <div class="empty">
+      <div style="font-size:60px">🎉</div>
+      <h2>Answer Submitted!</h2>
+      <p>Your answers were saved successfully.</p>
+    </div>
+  `;
+
+  toast("Answer submitted! 🎉");
+}
+
+function leaveQuiz(){
+  history.replaceState(null,"",window.location.pathname);
+  currentQuiz=null;
+  showPage("home");
+}
+
+async function myCreations(){
+  const ok=await ensureAnonymousUser();
+  if(!ok)return;
+
+  showPage("responses");
+
+  const list=document.getElementById("responseList");
+  list.innerHTML="Loading...";
+
+  const {data:quizzes,error:qError}=await supabaseClient
+    .from("quizzes")
+    .select("id,title,created_at")
+    .eq("owner_id",currentUser.id)
+    .order("created_at",{ascending:false});
+
+  if(qError){
+    console.error(qError);
+    list.innerHTML="Could not load your quizzes.";
+    return;
+  }
+
+  if(!quizzes.length){
+    list.innerHTML=`
+      <div class="empty">
+        <div style="font-size:50px">📝</div>
+        <h3>No creations yet</h3>
+        <p>Create your first quiz from the Create button.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const ids=quizzes.map(q=>q.id);
+
+  const {data:responses,error:rError}=await supabaseClient
+    .from("responses")
+    .select("id,quiz_id,name,answers,created_at")
+    .in("quiz_id",ids)
+    .order("created_at",{ascending:false});
+
+  if(rError){
+    console.error(rError);
+  }
+
+  const responseData=responses||[];
+
+  list.innerHTML=quizzes.map(q=>{
+    const rows=responseData.filter(r=>r.quiz_id===q.id);
+
+    return `
+      <div class="responseCard">
+        <strong>${escapeHtml(q.title)}</strong>
+        <p class="small">${rows.length} response(s)</p>
+        ${
+          rows.length
+          ? rows.map(r=>`
+              <div class="answerLine">
+                <strong>${escapeHtml(r.name)}</strong><br>
+                ${r.answers.map((a,i)=>`Q${i+1}: ${escapeHtml(a)}`).join("<br>")}
+              </div>
+            `).join("")
+          : `<div class="small">No one has answered this quiz yet.</div>`
+        }
+      </div>
+    `;
+  }).join("");
+}
+
+function createProfile(){
+  toast("Profile system coming in the next update.");
+}
+
+function ownerLogin(){
+  toast("Owner panel will be connected separately.");
+}
+
+window.addEventListener("hashchange",loadSharedQuiz);
+
+(async function init(){
+  await ensureAnonymousUser();
+  loadSharedQuiz();
+})();
 </script>
 
 </body>
