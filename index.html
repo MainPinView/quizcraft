@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#8b5cf6">
+<meta name="theme-color" content="#ff4f9a">
 <title>FUNVEXA — Create • Play • Share</title>
 
 <style>
@@ -11,10 +11,17 @@
 
 :root{
   --pink:#ff4f9a;
+  --pink2:#ff79b6;
   --purple:#8b5cf6;
-  --ink:#35162e;
+  --ink:#35152e;
   --muted:#765f70;
-  --glass:rgba(255,255,255,.84)
+  --white:#fff;
+  --line:#ead7e3;
+  --glass:rgba(255,255,255,.9);
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
@@ -23,4980 +30,91 @@ body{
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   color:var(--ink);
   background:
-    radial-gradient(circle at 15% 5%,#fff 0 4%,transparent 22%),
-    radial-gradient(circle at 90% 15%,#ffd4ec 0,transparent 28%),
-    linear-gradient(145deg,#ffd9ec 0%,#f6b7dc 42%,#9b6cf4 100%);
-  padding:18px 14px calc(100px + env(safe-area-inset-bottom))
+    radial-gradient(circle at 10% 5%,#fff 0 5%,transparent 25%),
+    radial-gradient(circle at 90% 15%,#ffdced 0 2%,transparent 28%),
+    linear-gradient(145deg,#fff9fc,#f8eafa 45%,#ffeef7);
+  padding-bottom:105px;
 }
 
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(255,255,255,.16),
-    transparent 70%
-  );
-  animation:shine 8s linear infinite
+button,input,textarea,select{
+  font:inherit;
 }
 
-@keyframes shine{
-  from{transform:translateX(-100%)}
-  to{transform:translateX(100%)}
+button{
+  cursor:pointer;
 }
 
-.app{
-  max-width:560px;
-  margin:auto
+button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
 }
+
+/* TOP */
 
 .topbar{
+  width:min(560px,100%);
+  margin:auto;
+  padding:18px 14px 12px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  margin:4px 3px 14px;
-  color:#fff
-}
-
-.brand-logo{
-  height:30px;
-  width:30px;
-  object-fit:cover;
-  border-radius:9px;
-  vertical-align:middle;
-  margin-right:7px;
-  box-shadow:0 4px 12px #5d2a7040
+  align-items:center;
 }
 
 .brand{
-  font-weight:900;
-  letter-spacing:.2px;
-  font-size:20px;
-  text-shadow:0 2px 12px #6e3c8870
-}
-
-.badge{
-  font-size:12px;
-  font-weight:800;
-  padding:7px 11px;
-  border-radius:999px;
-  background:#ffffff35;
-  border:1px solid #ffffff55;
-  backdrop-filter:blur(12px)
-}
-
-.card{
-  background:var(--glass);
-  border:1px solid #fff9;
-  border-radius:32px;
-  padding:25px 20px;
-  box-shadow:
-    0 25px 80px #5d2a7040,
-    0 2px 10px #fff8;
-  backdrop-filter:blur(18px);
-  overflow:hidden
-}
-
-.hidden{
-  display:none!important
-}
-
-.hero-icon{
-  font-size:58px;
-  text-align:center;
-  filter:drop-shadow(0 8px 14px #ff4f9a55);
-  margin-top:2px
-}
-
-.logo-hero{
-  padding:0;
-  background:transparent;
-  box-shadow:none
-}
-
-.logo-hero img{
-  width:92px;
-  height:92px;
-  object-fit:cover;
-  border-radius:24px;
-  box-shadow:0 12px 28px #6d2c7340
-}
-
-h1{
-  font-size:34px;
-  line-height:1.05;
-  text-align:center;
-  margin:9px 0 10px;
-  letter-spacing:-1px
-}
-
-h2{
-  font-size:23px;
-  margin:4px 0 7px
-}
-
-.sub{
-  text-align:center;
-  color:var(--muted);
-  line-height:1.5;
-  margin:0 auto 20px;
-  max-width:440px
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:11px;
-  margin-top:16px
-}
-
-.feature{
-  border:0;
-  padding:16px 13px;
-  text-align:left;
-  border-radius:22px;
-  background:#fff9;
-  color:var(--ink);
-  box-shadow:0 8px 24px #8d3d7220;
-  cursor:pointer;
-  transition:.18s;
-  min-height:92px
-}
-
-.feature:active,
-.choice:active,
-.btn:active{
-  transform:scale(.98)
-}
-
-.feature b{
-  display:block;
-  font-size:16px
-}
-
-.feature span{
-  display:block;
-  font-size:12px;
-  color:var(--muted);
-  margin-top:5px;
-  line-height:1.3
-}
-
-.icon{
-  font-size:25px;
-  margin-bottom:5px
-}
-
-.btn{
-  width:100%;
-  border:0;
-  border-radius:18px;
-  padding:15px 16px;
-  margin-top:10px;
-  font-size:16px;
-  font-weight:850;
-  cursor:pointer;
-  color:white;
-  background:linear-gradient(135deg,#ff4f9a,#ff6eb0);
-  box-shadow:0 10px 24px #ff4f9a40;
-  transition:.18s
-}
-
-.btn.dark{
-  background:#35162e;
-  box-shadow:0 10px 22px #35162e25
-}
-
-.btn.light{
-  background:#fff;
-  color:#5b2448;
-  box-shadow:0 7px 20px #6c31551c;
-  border:1px solid #edd9e5
-}
-
-.btn.small{
-  padding:11px 13px;
-  font-size:14px;
-  border-radius:14px
-}
-
-input,
-textarea{
-  width:100%;
-  padding:14px 15px;
-  border:1px solid #e7cfdf;
-  border-radius:16px;
-  background:#fffdfebd;
-  color:var(--ink);
-  font:inherit;
-  outline:none;
-  margin:6px 0
-}
-
-input:focus,
-textarea:focus{
-  border-color:#ff70ad;
-  box-shadow:0 0 0 4px #ff70ad18
-}
-
-textarea{
-  min-height:86px;
-  resize:vertical
-}
-
-.q{
-  padding:17px;
-  border-radius:22px;
-  background:#fff9;
-  border:1px solid #fff;
-  box-shadow:0 7px 22px #78346112;
-  margin:13px 0
-}
-
-.qhead{
   display:flex;
+  align-items:center;
   gap:9px;
-  align-items:flex-start;
-  margin-bottom:11px
-}
-
-.num{
-  min-width:28px;
-  height:28px;
-  display:grid;
-  place-items:center;
-  border-radius:10px;
-  background:#ffe0ef;
-  color:#d02e75;
+  font-size:21px;
   font-weight:900;
-  font-size:13px
+  letter-spacing:-.5px;
 }
 
-.qtext{
-  font-weight:850;
-  line-height:1.35
+.brand-logo{
+  width:36px;
+  height:36px;
+  flex:none;
 }
 
-.optrow{
-  display:flex;
-  gap:7px;
-  align-items:center;
-  margin:7px 0
-}
-
-.optrow input{
-  margin:0
-}
-
-.mini{
-  border:0;
-  border-radius:11px;
-  padding:9px 11px;
-  background:#ffe9f3;
-  color:#6b284d;
-  font-weight:800;
-  cursor:pointer
-}
-
-.choice{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  width:100%;
-  padding:13px 14px;
-  border:1px solid #ead6e2;
-  background:#fff;
-  border-radius:16px;
-  margin:8px 0;
-  cursor:pointer;
-  transition:.15s;
-  color:var(--ink);
-  font:inherit;
-  text-align:left
-}
-
-.choice input{
-  width:auto;
-  margin:0;
-  accent-color:var(--pink)
-}
-
-.choice:has(input:checked){
-  border-color:#ff5ca2;
-  background:#fff0f7;
-  box-shadow:0 0 0 3px #ff5ca21c
-}
-
-.progress{
-  height:7px;
-  background:#eadce6;
-  border-radius:99px;
-  overflow:hidden;
-  margin:6px 0 17px
-}
-
-.progress>i{
+.brand-sub{
   display:block;
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,#ff4f9a,#8b5cf6);
-  border-radius:99px;
-  transition:.25s
-}
-
-.mode-pill{
-  display:inline-flex;
-  padding:7px 10px;
-  border-radius:999px;
-  background:#ffe3f0;
-  color:#c72d72;
-  font-weight:850;
-  font-size:12px;
-  margin-bottom:9px
-}
-
-.sharebox{
-  background:#fff9;
-  border:1px solid #fff;
-  border-radius:18px;
-  padding:10px
-}
-
-.sharebox textarea{
-  margin:0;
-  background:#fff
-}
-
-.ans{
-  background:#fff9;
-  border:1px solid #fff;
-  border-radius:20px;
-  padding:15px;
-  margin:10px 0;
-  box-shadow:0 7px 20px #78346110
-}
-
-.ans small{
-  color:var(--muted)
-}
-
-.error{
-  color:#ad174a;
-  text-align:center;
-  font-size:13px;
-  margin-top:9px
-}
-
-.status{
-  text-align:center;
-  color:#fff;
-  font-size:12px;
-  margin:10px 0
-}
-
-.back{
-  margin-top:10px
-}
-
-.empty{
-  text-align:center;
-  padding:25px 8px;
-  color:var(--muted)
-}
-
-.result{
-  padding:22px;
-  border-radius:23px;
-  background:linear-gradient(135deg,#fff1f8,#f3eaff);
-  text-align:center;
-  margin:14px 0
-}
-
-.result .big{
-  font-size:45px
-}
-
-.divider{
-  height:1px;
-  background:#ead9e4;
-  margin:17px 0
-}
-
-.hero{
-  padding:7px 0 2px
-}
-
-.hero .hero-icon{
-  margin-top:0
-}
-
-.hero-copy{
-  background:linear-gradient(135deg,#fff8fd,#fff);
-  border:1px solid #fff;
-  border-radius:24px;
-  padding:17px 16px;
-  margin:12px 0 13px;
-  box-shadow:0 10px 28px #7a316515
-}
-
-.hero-copy strong{
-  font-size:18px;
-  display:block;
-  margin-bottom:5px
-}
-
-.hero-copy p{
-  font-size:13px;
-  color:var(--muted);
-  line-height:1.45;
-  margin:0
-}
-
-.hero-create{
-  margin-top:12px
-}
-
-.tiles{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px
-}
-
-.tile{
-  position:relative;
-  min-height:91px;
-  border:1px solid #fff;
-  background:#ffffffd9;
-  border-radius:19px;
-  padding:13px 12px;
-  text-align:left;
-  cursor:pointer;
-  box-shadow:0 7px 18px #7a316512;
-  transition:.16s
-}
-
-.tile:active{
-  transform:scale(.98)
-}
-
-.tile .bubble{
-  width:34px;
-  height:34px;
-  display:grid;
-  place-items:center;
-  border-radius:12px;
-  background:#f1ddff;
-  margin-bottom:7px;
-  font-size:18px
-}
-
-.tile b{
-  font-size:14px
-}
-
-.tile span{
-  display:block;
-  font-size:11px;
-  color:var(--muted);
-  margin-top:3px;
-  line-height:1.25
-}
-
-/* FIXED BOTTOM NAVIGATION */
-.bottomnav{
-  position:fixed!important;
-  left:50%;
-  bottom:0;
-  transform:translateX(-50%);
-  z-index:99999;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:3px;
-  width:min(560px,100vw);
-  margin:0;
-  padding:9px 8px calc(7px + env(safe-area-inset-bottom));
-  border-top:1px solid #ead7e3;
-  background:rgba(255,255,255,.96);
-  backdrop-filter:blur(18px);
-  box-shadow:0 -8px 28px rgba(93,42,112,.12)
-}
-
-.navitem{
-  border:0;
-  background:transparent;
-  color:#856f7e;
   font-size:10px;
-  font-weight:800;
-  padding:7px 3px;
-  border-radius:13px;
-  cursor:pointer
-}
-
-.navitem .ni{
-  display:block;
-  font-size:18px;
-  margin-bottom:2px
-}
-
-.navitem.active{
-  color:#d72f79;
-  background:#fff0f7
-}
-
-.navcreate{
-  margin-top:-25px
-}
-
-.navbadge{
-  position:relative
-}
-
-.navbadge:after{
-  content:"";
-  position:absolute;
-  top:4px;
-  right:19%;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#ff4f9a;
-  border:2px solid #fff
-}
-
-.profile-card{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:16px;
-  border:1px solid #fff;
-  background:#ffffffdf;
-  border-radius:20px
-}
-
-.avatar{
-  width:48px;
-  height:48px;
-  border-radius:16px;
-  background:linear-gradient(135deg,#ffd2e8,#dfc9ff);
-  display:grid;
-  place-items:center;
-  font-size:23px
-}
-
-.profile-meta b{
-  display:block;
-  font-size:16px
-}
-
-.profile-meta small{
-  display:block;
-  color:var(--muted);
-  margin-top:3px
-}
-
-.notif-card{
-  display:flex;
-  gap:12px;
-  padding:15px;
-  border:1px solid #fff;
-  background:#ffffffdf;
-  border-radius:19px;
-  margin:9px 0;
-  box-shadow:0 7px 18px #7a316512
-}
-
-.notif-icon{
-  width:42px;
-  height:42px;
-  border-radius:14px;
-  background:#f1ddff;
-  display:grid;
-  place-items:center;
-  font-size:20px;
-  flex:0 0 auto
-}
-
-.notif-card b{
-  font-size:14px
-}
-
-.notif-card p{
-  margin:4px 0 0;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.4
-}
-
-.photo-card{
-  border:1px solid #fff;
-  background:#ffffffdf;
-  border-radius:20px;
-  padding:14px;
-  margin:10px 0;
-  box-shadow:0 7px 18px #7a316512
-}
-
-.photo-preview{
-  width:100%;
-  aspect-ratio:4/3;
-  object-fit:cover;
-  border-radius:16px;
-  background:#f1ddff;
-  display:block
-}
-
-.rate-row{
-  display:flex;
-  gap:7px;
-  margin-top:9px
-}
-
-.rate-row button{
-  flex:1;
-  border:1px solid #ead6e2;
-  background:#fff;
-  border-radius:13px;
-  padding:10px 4px;
-  font-weight:800;
-  color:var(--ink);
-  cursor:pointer
-}
-
-.insta-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  text-decoration:none;
-  text-align:center;
-  width:100%;
-  border-radius:18px;
-  padding:14px 16px;
-  margin-top:10px;
-  font-weight:850;
-  color:#fff;
-  background:linear-gradient(135deg,#ff4f9a,#8b5cf6);
-  box-shadow:0 10px 24px #ff4f9a30
-}
-
-.footer-note{
-  text-align:center;
-  font-size:10px;
-  color:#8a7180;
-  line-height:1.5;
-  margin:16px 0 4px
-}
-
-.footer-note a{
-  color:#b82f77;
-  text-decoration:none;
-  font-weight:800
-}
-
-.safe-note{
-  font-size:11px;
-  color:var(--muted);
-  line-height:1.4;
-  background:#fff4f9;
-  border-radius:14px;
-  padding:10px;
-  margin:8px 0
-}
-
-.file-input{
-  padding:10px;
-  background:#fff
+  font-weight:700;
+  color:#a08094;
+  letter-spacing:.3px;
+  margin-top:1px;
 }
 
 .top-actions{
   display:flex;
+  align-items:center;
   gap:8px;
-  align-items:center
+}
+
+.online{
+  background:#e9fbea;
+  color:#28783c;
+  padding:7px 11px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:800;
 }
 
 .top-icon{
-  border:0;
-  background:#ffffff35;
-  color:#fff;
-  width:36px;
-  height:36px;
-  border-radius:12px;
-  cursor:pointer;
-  font-size:17px;
-  position:relative
-}
-
-.top-icon.dot:after{
-  content:"";
-  position:absolute;
-  top:5px;
-  right:5px;
-  width:7px;
-  height:7px;
-  background:#ff4f9a;
-  border:2px solid #fff;
-  border-radius:50%
-}
-
-.navcreate .plus{
-  width:44px;
-  height:44px;
-  margin:auto;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  color:white;
-  font-size:24px;
-  background:linear-gradient(135deg,#ff4f9a,#8b5cf6);
-  box-shadow:0 9px 20px #8b5cf644;
-  border:4px solid #fff
-}
-
-.section-title{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin:17px 2px 9px
-}
-
-.section-title h3{
-  margin:0;
-  font-size:16px
-}
-
-.section-title span{
-  font-size:11px;
-  color:#a06b88
-}
-
-.create-list{
-  display:grid;
-  gap:9px
-}
-
-.explore-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:6px
-}
-
-.game-card{
-  border:1px solid #fff;
-  background:#ffffffdf;
-  border-radius:19px;
-  padding:14px 12px;
-  text-align:left;
-  cursor:pointer;
-  box-shadow:0 7px 18px #7a316512;
-  transition:.16s;
-  color:var(--ink)
-}
-
-.game-card:active{
-  transform:scale(.98)
-}
-
-.game-card .game-icon{
-  width:38px;
-  height:38px;
-  display:grid;
-  place-items:center;
-  border-radius:13px;
-  background:#f1ddff;
-  font-size:20px;
-  margin-bottom:8px
-}
-
-.game-card b{
-  font-size:14px;
-  display:block
-}
-
-.game-card span{
-  display:block;
-  font-size:11px;
-  color:var(--muted);
-  margin-top:3px;
-  line-height:1.25
-}
-
-.explore-head{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:6px
-}
-
-.explore-head .backbtn{
-  width:auto;
-  margin:0;
-  padding:9px 12px
-}
-
-.game-pill{
-  display:inline-block;
-  font-size:10px;
-  font-weight:900;
-  padding:5px 8px;
-  border-radius:999px;
-  background:#ffe3f0;
-  color:#c72d72;
-  margin-bottom:5px
-}
-
-.create-card{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:14px;
-  border:1px solid #fff;
-  background:#ffffffdb;
-  border-radius:18px;
-  cursor:pointer
-}
-
-.create-card .ccicon{
   width:42px;
   height:42px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  font-size:21px;
-  background:#f0e2ff
+  border:0;
+  border-radius:15px;
+  background:rgba(255,255,255,.72);
+  box-shadow:0 5px 18px rgba(80,30,70,.08);
 }
 
-.create-card b{
-  font-size:14px
+/* APP */
+
+.app{
+  width:min(560px,100%);
+  margin:auto;
+  padding:0 14px;
 }
-
-.create-card small{
-  display:block;
-  color:var(--muted);
-  margin-top:2px
-}
-
-@media(max-width:430px){
-  .card{
-    padding:22px 15px;
-    border-radius:28px
-  }
-
-  h1{
-    font-size:31px
-  }
-
-  .grid{
-    gap:9px
-  }
-
-  .feature{
-    min-height:88px;
-    padding:14px 11px
-  }
-}</style>
-</head>
-
-<body>
-
-<div class="bottomnav">
-  <button class="navitem active" data-action="show" data-target="home">
-    <span class="ni">⌂</span>Home
-  </button>
-
-  <button class="navitem" data-action="show" data-target="explore">
-    <span class="ni">⌕</span>Explore
-  </button>
-
-  <button class="navitem navcreate" data-action="startCreate" data-type="quiz">
-    <span class="plus">＋</span>
-    <span>Create</span>
-  </button>
-
-  <button class="navitem navbadge" data-action="show" data-target="notifications">
-    <span class="ni">🔔</span>Notifications
-  </button>
-
-  <button class="navitem" data-action="show" data-target="profile">
-    <span class="ni">♙</span>Profile
-  </button>
-</div>
-
-<div class="app">
-
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <div class="brand">
-      <img class="brand-logo" id="brandLogo" alt="FUNVEXA">
-      <span>FUNVEXA</span>
-    </div>
-
-    <div class="top-actions">
-      <button
-        class="top-icon dot"
-        type="button"
-        data-action="show"
-        data-target="notifications">
-        🔔
-      </button>
-
-      <span class="badge">Create • Play • Share</span>
-    </div>
-  </div>
-
-
-  <!-- HOME -->
-  <section id="home" class="card page">
-
-    <div class="hero">
-
-      <div class="logo-hero">
-        <img id="heroLogo" alt="FUNVEXA logo">
-      </div>
-
-      <h1>Turn your ideas into fun & interactive games! 💗</h1>
-
-      <p class="sub">
-        Create quizzes, polls, challenges and personality games.
-        Share them with friends and see what they choose.
-      </p>
-
-      <button
-        class="btn hero-create"
-        type="button"
-        data-action="startCreate"
-        data-type="quiz">
-        ✨ Create New
-      </button>
-
-    </div>
-
-
-    <div class="section-title">
-      <h3>Popular Games</h3>
-      <span>Play something fun</span>
-    </div>
-
-
-    <div class="tiles">
-
-      <button
-        class="tile"
-        type="button"
-        data-action="startCreate"
-        data-type="quiz">
-
-        <div class="bubble">📝</div>
-        <b>Quiz</b>
-        <span>Test your friends</span>
-
-      </button>
-
-
-      <button
-        class="tile"
-        type="button"
-        data-action="startCreate"
-        data-type="poll">
-
-        <div class="bubble">📊</div>
-        <b>Poll</b>
-        <span>Ask everyone</span>
-
-      </button>
-
-
-      <button
-        class="tile"
-        type="button"
-        data-action="startCreate"
-        data-type="thisthat">
-
-        <div class="bubble">⚡</div>
-        <b>This or That</b>
-        <span>Pick one</span>
-
-      </button>
-
-
-      <button
-        class="tile"
-        type="button"
-        data-action="startCreate"
-        data-type="personality">
-
-        <div class="bubble">💫</div>
-        <b>Personality</b>
-        <span>Discover your type</span>
-
-      </button>
-
-    </div>
-
-
-    <div class="hero-copy">
-      <strong>Make something people want to answer.</strong>
-
-      <p>
-        Create your own game, share the link and collect responses
-        from your friends.
-      </p>
-    </div>
-
-
-    <div class="section-title">
-      <h3>Explore all games</h3>
-      <span>8 games</span>
-    </div>
-
-
-    <div class="explore-grid">
-
-      <button
-        class="game-card"
-        type="button"
-        data-action="startCreate"
-        data-type="quiz">
-
-        <div class="game-icon">📝</div>
-        <b>Quiz</b>
-        <span>Questions & answers</span>
-
-      </button>
-
-
-      <button
-        class="game-card"
-        type="button"
-        data-action="startCreate"
-        data-type="poll">
-
-        <div class="game-icon">📊</div>
-        <b>Poll</b>
-        <span>See what people choose</span>
-
-      </button>
-
-
-      <button
-        class="game-card"
-        type="button"
-        data-action="startCreate"
-        data-type="thisthat">
-
-        <div class="game-icon">⚡</div>
-        <b>This or That</b>
-        <span>Two choices</span>
-
-      </button>
-
-
-      <button
-        class="game-card"
-        type="button"
-        data-action="startCreate"
-        data-type="personality">
-
-        <div class="game-icon">💫</div>
-        <b>Personality</b>
-        <span>Find your type</span>
-
-      </button>
-
-
-      <button
-        class="game-card"
-        type="button"
-        data-action="startCreate"
-        data-type="wyr">
-
-        <div class="game-icon">🤔</div>
-        <b>Would You Rather</b>
-        <span>Choose your answer</span>
-
-      </button>
-
-
-      <button
-        class="game-card"
-        type="button"
-        data-action="startCreate"
-        data-type="emoji">
-
-        <div class="game-icon">😂</div>
-        <b>Emoji Challenge</b>
-        <span>Guess the meaning</span>
-
-      </button>
-
-
-      <button
-        class="game-card"
-        type="button"
-        data-action="startCreate"
-        data-type="rapid">
-
-        <div class="game-icon">🔥</div>
-        <b>Rapid Fire</b>
-        <span>Answer quickly</span>
-
-      </button>
-
-
-      <button
-        class="game-card"
-        type="button"
-        data-action="startCreate"
-        data-type="trivia">
-
-        <div class="game-icon">🧠</div>
-        <b>Trivia Battle</b>
-        <span>Challenge your knowledge</span>
-
-      </button>
-
-    </div>
-
-
-    <div class="section-title">
-      <h3>Your space</h3>
-      <span>Only on your device</span>
-    </div>
-
-
-    <div class="create-list">
-
-      <button
-        class="create-card"
-        type="button"
-        data-action="openResponses">
-
-        <div class="ccicon">👀</div>
-
-        <div>
-          <b>My Creations</b>
-          <small>See who answered your games</small>
-        </div>
-
-      </button>
-
-
-      <button
-        class="create-card"
-        type="button"
-        data-action="show"
-        data-target="notifications">
-
-        <div class="ccicon">🔔</div>
-
-        <div>
-          <b>Notifications</b>
-          <small>Updates from FUNVEXA</small>
-        </div>
-
-      </button>
-
-
-      <button
-        class="create-card"
-        type="button"
-        data-action="show"
-        data-target="profile">
-
-        <div class="ccicon">♙</div>
-
-        <div>
-          <b>Profile</b>
-          <small>Manage your creator profile</small>
-        </div>
-
-      </button>
-
-    </div>
-
-
-    <div class="footer-note">
-      FUNVEXA • Create • Play • Share<br>
-      <a href="#" onclick="return false">@funvexa.oi</a>
-    </div>
-
-  </section>
-
-
-  <!-- EXPLORE -->
-  <section id="explore" class="card page hidden">
-
-    <div class="explore-head">
-
-      <button
-        class="btn light backbtn"
-        type="button"
-        data-action="show"
-        data-target="home">
-        ←
-      </button>
-
-      <div>
-        <div class="game-pill">FUNVEXA</div>
-        <h2>Explore Games</h2>
-      </div>
-
-    </div>
-
-    <p class="sub">
-      Pick a game and create something your friends will love.
-    </p>
-
-
-    <div class="explore-grid">
-
-      <button class="game-card" type="button"
-        data-action="startCreate" data-type="quiz">
-        <div class="game-icon">📝</div>
-        <b>Quiz</b>
-        <span>Questions & answers</span>
-      </button>
-
-      <button class="game-card" type="button"
-        data-action="startCreate" data-type="poll">
-        <div class="game-icon">📊</div>
-        <b>Poll</b>
-        <span>Ask your audience</span>
-      </button>
-
-      <button class="game-card" type="button"
-        data-action="startCreate" data-type="thisthat">
-        <div class="game-icon">⚡</div>
-        <b>This or That</b>
-        <span>Pick your favourite</span>
-      </button>
-
-      <button class="game-card" type="button"
-        data-action="startCreate" data-type="personality">
-        <div class="game-icon">💫</div>
-        <b>Personality Quiz</b>
-        <span>Discover your type</span>
-      </button>
-
-      <button class="game-card" type="button"
-        data-action="startCreate" data-type="wyr">
-        <div class="game-icon">🤔</div>
-        <b>Would You Rather</b>
-        <span>Impossible choices</span>
-      </button>
-
-      <button class="game-card" type="button"
-        data-action="startCreate" data-type="emoji">
-        <div class="game-icon">😂</div>
-        <b>Emoji Challenge</b>
-        <span>Decode the emojis</span>
-      </button>
-
-      <button class="game-card" type="button"
-        data-action="startCreate" data-type="rapid">
-        <div class="game-icon">🔥</div>
-        <b>Rapid Fire</b>
-        <span>Quick answers</span>
-      </button>
-
-      <button class="game-card" type="button"
-        data-action="startCreate" data-type="trivia">
-        <div class="game-icon">🧠</div>
-        <b>Trivia Battle</b>
-        <span>Show what you know</span>
-      </button>
-
-    </div>
-
-  </section><!-- ================= CREATE / QUIZ CREATOR ================= -->
-
-<section id="create" class="screen">
-  <div class="section-head">
-    <div>
-      <div class="eyebrow">CREATE</div>
-      <h2>Make something fun ✨</h2>
-      <p class="muted">Turn your idea into a shareable game.</p>
-    </div>
-  </div>
-
-  <div class="create-grid">
-
-    <button class="game-card featured" type="button"
-      data-action="startCreate" data-type="quiz">
-      <div class="game-icon">🧠</div>
-      <div>
-        <h3>Quiz</h3>
-        <p>Ask questions and test your friends.</p>
-      </div>
-      <span class="arrow">→</span>
-    </button>
-
-    <button class="game-card" type="button"
-      data-action="startCreate" data-type="poll">
-      <div class="game-icon">📊</div>
-      <div>
-        <h3>Poll</h3>
-        <p>Let everyone vote.</p>
-      </div>
-      <span class="arrow">→</span>
-    </button>
-
-    <button class="game-card" type="button"
-      data-action="startCreate" data-type="this-or-that">
-      <div class="game-icon">⚡</div>
-      <div>
-        <h3>This or That</h3>
-        <p>Choose between two options.</p>
-      </div>
-      <span class="arrow">→</span>
-    </button>
-
-    <button class="game-card" type="button"
-      data-action="startCreate" data-type="personality">
-      <div class="game-icon">💜</div>
-      <div>
-        <h3>Personality</h3>
-        <p>Discover your result.</p>
-      </div>
-      <span class="arrow">→</span>
-    </button>
-
-  </div>
-</section>
-
-
-<!-- ================= QUIZ CREATOR ================= -->
-
-<section id="quizCreator" class="screen">
-
-  <div class="creator-top">
-    <button class="back-btn" type="button"
-      data-action="show" data-target="create">←</button>
-
-    <div>
-      <div class="eyebrow">NEW QUIZ</div>
-      <h2>Create your quiz</h2>
-    </div>
-  </div>
-
-  <div class="creator-card">
-
-    <label class="field-label" for="quizTitle">
-      Quiz title
-    </label>
-
-    <input
-      id="quizTitle"
-      class="text-input"
-      type="text"
-      maxlength="80"
-      placeholder="e.g. How well do you know me?"
-      autocomplete="off"
-    >
-
-    <div class="creator-divider"></div>
-
-    <div class="question-head">
-      <div>
-        <div class="eyebrow">QUESTIONS</div>
-        <h3>Add your questions</h3>
-      </div>
-
-      <span id="questionCount" class="count-pill">0</span>
-    </div>
-
-    <div id="questionList"></div>
-
-    <button
-      id="addQuestionBtn"
-      class="secondary-btn full-btn"
-      type="button"
-      data-action="addQuestion">
-      ＋ Add question
-    </button>
-
-    <button
-      id="publishBtn"
-      class="primary-btn full-btn"
-      type="button"
-      data-action="publishQuiz">
-      Publish quiz ✨
-    </button>
-
-    <p id="creatorMessage" class="form-message"></p>
-
-  </div>
-</section>
-
-
-<!-- ================= NOTIFICATIONS ================= -->
-
-<section id="notifications" class="screen">
-
-  <div class="section-head">
-    <div>
-      <div class="eyebrow">UPDATES</div>
-      <h2>Notifications 🔔</h2>
-      <p class="muted">Your latest FUNVEXA activity.</p>
-    </div>
-  </div>
-
-  <div class="empty-card">
-    <div class="empty-icon">✨</div>
-    <h3>You're all caught up</h3>
-    <p>No new notifications right now.</p>
-  </div>
-
-</section>
-
-
-<!-- ================= PROFILE ================= -->
-
-<section id="profile" class="screen">
-
-  <div class="profile-card">
-
-    <div class="profile-avatar" id="profileAvatar">
-      ✨
-    </div>
-
-    <h2 id="profileName">Your FUNVEXA</h2>
-    <p class="muted">Create games. Share them. Have fun.</p>
-
-    <div class="profile-actions">
-
-      <button
-        class="profile-action"
-        type="button"
-        data-action="myCreations">
-        <span>🎮</span>
-        <div>
-          <strong>My Creations</strong>
-          <small>View your games</small>
-        </div>
-        <span>→</span>
-      </button>
-
-      <button
-        class="profile-action"
-        type="button"
-        data-action="ownerLogin">
-        <span>🔐</span>
-        <div>
-          <strong>Creator Access</strong>
-          <small>Manage your responses</small>
-        </div>
-        <span>→</span>
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= MY CREATIONS ================= -->
-
-<section id="myCreations" class="screen">
-
-  <div class="creator-top">
-    <button class="back-btn" type="button"
-      data-action="show" data-target="profile">←</button>
-
-    <div>
-      <div class="eyebrow">YOUR SPACE</div>
-      <h2>My Creations</h2>
-    </div>
-  </div>
-
-  <div id="creationsList" class="creations-list">
-
-    <div class="loading-card">
-      Loading your creations…
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= RESPONSES ================= -->
-
-<section id="responses" class="screen">
-
-  <div class="creator-top">
-    <button class="back-btn" type="button"
-      data-action="show" data-target="myCreations">←</button>
-
-    <div>
-      <div class="eyebrow">RESPONSES</div>
-      <h2 id="responsesTitle">Quiz responses</h2>
-    </div>
-  </div>
-
-  <div id="responsesList" class="responses-list">
-
-    <div class="loading-card">
-      Loading responses…
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= SHARE RESULT ================= -->
-
-<section id="shareResult" class="screen">
-
-  <div class="result-card">
-
-    <div class="result-icon">🎉</div>
-
-    <div class="eyebrow">PUBLISHED</div>
-
-    <h2>Your quiz is live!</h2>
-
-    <p class="muted">
-      Share the link with your friends and collect their answers.
-    </p>
-
-    <div class="share-box">
-      <input
-        id="shareUrl"
-        class="text-input"
-        type="text"
-        readonly
-      >
-
-      <button
-        class="primary-btn full-btn"
-        type="button"
-        data-action="copyShareLink">
-        Copy link 🔗
-      </button>
-    </div>
-
-    <button
-      class="secondary-btn full-btn"
-      type="button"
-      data-action="show"
-      data-target="home">
-      Back to home
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- ================= SHARED QUIZ / PLAY ================= -->
-
-<section id="playQuiz" class="screen">
-
-  <div class="play-header">
-
-    <div class="eyebrow">FUNVEXA QUIZ</div>
-
-    <h2 id="playTitle">
-      Quiz
-    </h2>
-
-    <div class="progress-wrap">
-      <div class="progress-track">
-        <div id="quizProgress" class="progress-bar"></div>
-      </div>
-
-      <span id="quizProgressText">
-        1 / 1
-      </span>
-    </div>
-
-  </div>
-
-  <div id="playQuestion" class="play-card"></div>
-
-</section>
-
-
-<!-- ================= QUIZ COMPLETE ================= -->
-
-<section id="quizComplete" class="screen">
-
-  <div class="result-card">
-
-    <div class="result-icon">🥳</div>
-
-    <div class="eyebrow">ALL DONE</div>
-
-    <h2 id="completeTitle">
-      Quiz completed!
-    </h2>
-
-    <p id="completeMessage" class="muted">
-      Your answers have been submitted.
-    </p>
-
-    <div id="scoreBox" class="score-box"></div>
-
-    <button
-      class="primary-btn full-btn"
-      type="button"
-      data-action="show"
-      data-target="home">
-      Create something too ✨
-    </button>
-
-  </div>
-
-</section><!-- ================= CREATE / QUIZ CREATOR ================= -->
-
-<section id="create" class="screen">
-  <div class="section-head">
-    <div>
-      <div class="eyebrow">CREATE</div>
-      <h2>Make something fun ✨</h2>
-      <p class="muted">Turn your idea into a shareable game.</p>
-    </div>
-  </div>
-
-  <div class="create-grid">
-
-    <button class="game-card featured" type="button"
-      data-action="startCreate" data-type="quiz">
-      <div class="game-icon">🧠</div>
-      <div>
-        <h3>Quiz</h3>
-        <p>Ask questions and test your friends.</p>
-      </div>
-      <span class="arrow">→</span>
-    </button>
-
-    <button class="game-card" type="button"
-      data-action="startCreate" data-type="poll">
-      <div class="game-icon">📊</div>
-      <div>
-        <h3>Poll</h3>
-        <p>Let everyone vote.</p>
-      </div>
-      <span class="arrow">→</span>
-    </button>
-
-    <button class="game-card" type="button"
-      data-action="startCreate" data-type="this-or-that">
-      <div class="game-icon">⚡</div>
-      <div>
-        <h3>This or That</h3>
-        <p>Choose between two options.</p>
-      </div>
-      <span class="arrow">→</span>
-    </button>
-
-    <button class="game-card" type="button"
-      data-action="startCreate" data-type="personality">
-      <div class="game-icon">💜</div>
-      <div>
-        <h3>Personality</h3>
-        <p>Discover your result.</p>
-      </div>
-      <span class="arrow">→</span>
-    </button>
-
-  </div>
-</section>
-
-
-<!-- ================= QUIZ CREATOR ================= -->
-
-<section id="quizCreator" class="screen">
-
-  <div class="creator-top">
-    <button class="back-btn" type="button"
-      data-action="show" data-target="create">←</button>
-
-    <div>
-      <div class="eyebrow">NEW QUIZ</div>
-      <h2>Create your quiz</h2>
-    </div>
-  </div>
-
-  <div class="creator-card">
-
-    <label class="field-label" for="quizTitle">
-      Quiz title
-    </label>
-
-    <input
-      id="quizTitle"
-      class="text-input"
-      type="text"
-      maxlength="80"
-      placeholder="e.g. How well do you know me?"
-      autocomplete="off"
-    >
-
-    <div class="creator-divider"></div>
-
-    <div class="question-head">
-      <div>
-        <div class="eyebrow">QUESTIONS</div>
-        <h3>Add your questions</h3>
-      </div>
-
-      <span id="questionCount" class="count-pill">0</span>
-    </div>
-
-    <div id="questionList"></div>
-
-    <button
-      id="addQuestionBtn"
-      class="secondary-btn full-btn"
-      type="button"
-      data-action="addQuestion">
-      ＋ Add question
-    </button>
-
-    <button
-      id="publishBtn"
-      class="primary-btn full-btn"
-      type="button"
-      data-action="publishQuiz">
-      Publish quiz ✨
-    </button>
-
-    <p id="creatorMessage" class="form-message"></p>
-
-  </div>
-</section>
-
-
-<!-- ================= NOTIFICATIONS ================= -->
-
-<section id="notifications" class="screen">
-
-  <div class="section-head">
-    <div>
-      <div class="eyebrow">UPDATES</div>
-      <h2>Notifications 🔔</h2>
-      <p class="muted">Your latest FUNVEXA activity.</p>
-    </div>
-  </div>
-
-  <div class="empty-card">
-    <div class="empty-icon">✨</div>
-    <h3>You're all caught up</h3>
-    <p>No new notifications right now.</p>
-  </div>
-
-</section>
-
-
-<!-- ================= PROFILE ================= -->
-
-<section id="profile" class="screen">
-
-  <div class="profile-card">
-
-    <div class="profile-avatar" id="profileAvatar">
-      ✨
-    </div>
-
-    <h2 id="profileName">Your FUNVEXA</h2>
-    <p class="muted">Create games. Share them. Have fun.</p>
-
-    <div class="profile-actions">
-
-      <button
-        class="profile-action"
-        type="button"
-        data-action="myCreations">
-        <span>🎮</span>
-        <div>
-          <strong>My Creations</strong>
-          <small>View your games</small>
-        </div>
-        <span>→</span>
-      </button>
-
-      <button
-        class="profile-action"
-        type="button"
-        data-action="ownerLogin">
-        <span>🔐</span>
-        <div>
-          <strong>Creator Access</strong>
-          <small>Manage your responses</small>
-        </div>
-        <span>→</span>
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= MY CREATIONS ================= -->
-
-<section id="myCreations" class="screen">
-
-  <div class="creator-top">
-    <button class="back-btn" type="button"
-      data-action="show" data-target="profile">←</button>
-
-    <div>
-      <div class="eyebrow">YOUR SPACE</div>
-      <h2>My Creations</h2>
-    </div>
-  </div>
-
-  <div id="creationsList" class="creations-list">
-
-    <div class="loading-card">
-      Loading your creations…
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= RESPONSES ================= -->
-
-<section id="responses" class="screen">
-
-  <div class="creator-top">
-    <button class="back-btn" type="button"
-      data-action="show" data-target="myCreations">←</button>
-
-    <div>
-      <div class="eyebrow">RESPONSES</div>
-      <h2 id="responsesTitle">Quiz responses</h2>
-    </div>
-  </div>
-
-  <div id="responsesList" class="responses-list">
-
-    <div class="loading-card">
-      Loading responses…
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= SHARE RESULT ================= -->
-
-<section id="shareResult" class="screen">
-
-  <div class="result-card">
-
-    <div class="result-icon">🎉</div>
-
-    <div class="eyebrow">PUBLISHED</div>
-
-    <h2>Your quiz is live!</h2>
-
-    <p class="muted">
-      Share the link with your friends and collect their answers.
-    </p>
-
-    <div class="share-box">
-      <input
-        id="shareUrl"
-        class="text-input"
-        type="text"
-        readonly
-      >
-
-      <button
-        class="primary-btn full-btn"
-        type="button"
-        data-action="copyShareLink">
-        Copy link 🔗
-      </button>
-    </div>
-
-    <button
-      class="secondary-btn full-btn"
-      type="button"
-      data-action="show"
-      data-target="home">
-      Back to home
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- ================= SHARED QUIZ / PLAY ================= -->
-
-<section id="playQuiz" class="screen">
-
-  <div class="play-header">
-
-    <div class="eyebrow">FUNVEXA QUIZ</div>
-
-    <h2 id="playTitle">
-      Quiz
-    </h2>
-
-    <div class="progress-wrap">
-      <div class="progress-track">
-        <div id="quizProgress" class="progress-bar"></div>
-      </div>
-
-      <span id="quizProgressText">
-        1 / 1
-      </span>
-    </div>
-
-  </div>
-
-  <div id="playQuestion" class="play-card"></div>
-
-</section>
-
-
-<!-- ================= QUIZ COMPLETE ================= -->
-
-<section id="quizComplete" class="screen">
-
-  <div class="result-card">
-
-    <div class="result-icon">🥳</div>
-
-    <div class="eyebrow">ALL DONE</div>
-
-    <h2 id="completeTitle">
-      Quiz completed!
-    </h2>
-
-    <p id="completeMessage" class="muted">
-      Your answers have been submitted.
-    </p>
-
-    <div id="scoreBox" class="score-box"></div>
-
-    <button
-      class="primary-btn full-btn"
-      type="button"
-      data-action="show"
-      data-target="home">
-      Create something too ✨
-    </button>
-
-  </div>
-
-</section><!-- ================= APP OVERLAYS ================= -->
-
-<div id="toast" class="toast" aria-live="polite"></div>
-
-<div id="modal" class="modal" aria-hidden="true">
-  <div class="modal-backdrop" data-action="closeModal"></div>
-
-  <div class="modal-card">
-
-    <button
-      class="modal-close"
-      type="button"
-      data-action="closeModal">
-      ×
-    </button>
-
-    <div id="modalContent"></div>
-
-  </div>
-</div>
-
-
-<!-- ================= JAVASCRIPT ================= -->
-
-<script>
-/* =====================================================
-   FUNVEXA — APP STATE
-===================================================== */
-
-const SUPABASE_URL =
-  "https://rzbcofckfgnurhnxmgbl.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_WPGUUlCUn52sH3rvaYoAgg_MCIeDkYZ";
-
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
-
-
-let currentUser = null;
-let currentQuiz = null;
-let currentQuestionIndex = 0;
-let currentAnswers = [];
-let lastQuizId = null;
-let currentResponseQuizId = null;
-
-
-/* =====================================================
-   LOGO
-   Small SVG logo — no huge Base64 image required.
-===================================================== */
-
-const FUNVEXA_LOGO = `
-<svg xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 600 170"
-     role="img"
-     aria-label="FUNVEXA">
-  <defs>
-    <linearGradient id="fxg"
-      x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ff4fa3"/>
-      <stop offset="48%" stop-color="#9b5cff"/>
-      <stop offset="100%" stop-color="#6d4aff"/>
-    </linearGradient>
-  </defs>
-
-  <rect x="12" y="12"
-        width="146" height="146"
-        rx="38"
-        fill="url(#fxg)"/>
-
-  <path
-    d="M53 48h64c10 0 17 7 17 17v7H82v17h43v25H82v28H53z"
-    fill="white"/>
-
-  <text
-    x="180"
-    y="105"
-    font-family="Arial, sans-serif"
-    font-size="72"
-    font-weight="900"
-    letter-spacing="-3"
-    fill="url(#fxg)">
-    FUNVEXA
-  </text>
-
-  <text
-    x="183"
-    y="137"
-    font-family="Arial, sans-serif"
-    font-size="18"
-    font-weight="600"
-    fill="#8d7b91">
-    Create • Play • Share
-  </text>
-</svg>
-`;
-
-
-const LOGO_DATA =
-  "data:image/svg+xml;charset=UTF-8," +
-  encodeURIComponent(FUNVEXA_LOGO);
-
-
-/* Put logo into both locations from Part 2. */
-
-function setupLogos(){
-
-  const brandLogo =
-    document.getElementById("brandLogo");
-
-  const heroLogo =
-    document.getElementById("heroLogo");
-
-  if(brandLogo){
-    brandLogo.src = LOGO_DATA;
-  }
-
-  if(heroLogo){
-    heroLogo.src = LOGO_DATA;
-  }
-}
-
-
-/* =====================================================
-   SCREEN NAVIGATION
-===================================================== */
-
-function showScreen(id){
-
-  document
-    .querySelectorAll(".screen")
-    .forEach(screen => {
-      screen.classList.remove("active");
-    });
-
-  const target =
-    document.getElementById(id);
-
-  if(!target) return;
-
-  target.classList.add("active");
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-  document
-    .querySelectorAll(".navitem")
-    .forEach(item => {
-      item.classList.remove("active");
-
-      if(
-        item.dataset.target === id ||
-        item.dataset.action === "startCreate" &&
-        id === "create"
-      ){
-        item.classList.add("active");
-      }
-    });
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-let toastTimer = null;
-
-function toast(message){
-
-  const box =
-    document.getElementById("toast");
-
-  if(!box) return;
-
-  box.textContent = message;
-  box.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer = setTimeout(() => {
-    box.classList.remove("show");
-  }, 2600);
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-function openModal(content){
-
-  const modal =
-    document.getElementById("modal");
-
-  const modalContent =
-    document.getElementById("modalContent");
-
-  if(!modal || !modalContent) return;
-
-  modalContent.innerHTML = content;
-
-  modal.classList.add("show");
-  modal.setAttribute("aria-hidden","false");
-}
-
-
-function closeModal(){
-
-  const modal =
-    document.getElementById("modal");
-
-  if(!modal) return;
-
-  modal.classList.remove("show");
-  modal.setAttribute("aria-hidden","true");
-}
-
-
-/* =====================================================
-   ANONYMOUS USER
-===================================================== */
-
-async function ensureAnonymousUser(){
-
-  try{
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .auth
-      .getSession();
-
-    if(error){
-      console.error(error);
-    }
-
-    if(data?.session?.user){
-
-      currentUser =
-        data.session.user;
-
-      return currentUser;
-    }
-
-
-    const result =
-      await supabaseClient
-        .auth
-        .signInAnonymously();
-
-    if(result.error){
-
-      console.error(
-        "Anonymous login failed:",
-        result.error
-      );
-
-      toast(
-        "Creator access is currently unavailable."
-      );
-
-      return null;
-    }
-
-    currentUser =
-      result.data.user;
-
-    return currentUser;
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      "Something went wrong while connecting."
-    );
-
-    return null;
-  }
-}
-
-
-/* =====================================================
-   CREATE NEW GAME
-===================================================== */
-
-function startCreate(type){
-
-  if(type !== "quiz"){
-
-    openModal(`
-      <div class="modal-icon">🚀</div>
-      <h2>Coming next!</h2>
-      <p>
-        ${escapeHtml(type)}
-        creation will be available soon.
-      </p>
-
-      <button
-        class="primary-btn full-btn"
-        type="button"
-        data-action="closeModal">
-        Got it
-      </button>
-    `);
-
-    return;
-  }
-
-  openQuizCreator();
-}
-
-
-/* =====================================================
-   QUIZ CREATOR
-===================================================== */
-
-function openQuizCreator(){
-
-  const title =
-    document.getElementById("quizTitle");
-
-  const list =
-    document.getElementById("questionList");
-
-  const message =
-    document.getElementById("creatorMessage");
-
-  if(title) title.value = "";
-
-  if(list) list.innerHTML = "";
-
-  if(message) message.textContent = "";
-
-  showScreen("quizCreator");
-
-  addQuestion();
-}
-
-
-function addQuestion(){
-
-  const list =
-    document.getElementById("questionList");
-
-  if(!list) return;
-
-  const number =
-    list.children.length + 1;
-
-  const card =
-    document.createElement("div");
-
-  card.className = "question-editor";
-
-  card.dataset.question =
-    String(number);
-
-  card.innerHTML = `
-
-    <div class="question-editor-top">
-
-      <strong>
-        Question ${number}
-      </strong>
-
-      <button
-        type="button"
-        class="remove-question"
-        aria-label="Remove question">
-        ×
-      </button>
-
-    </div>
-
-    <input
-      class="text-input question-text"
-      type="text"
-      maxlength="180"
-      placeholder="Write your question…">
-
-    <div class="option-grid">
-
-      <input
-        class="text-input option-input"
-        type="text"
-        maxlength="100"
-        placeholder="Option A">
-
-      <input
-        class="text-input option-input"
-        type="text"
-        maxlength="100"
-        placeholder="Option B">
-
-      <input
-        class="text-input option-input"
-        type="text"
-        maxlength="100"
-        placeholder="Option C">
-
-      <input
-        class="text-input option-input"
-        type="text"
-        maxlength="100"
-        placeholder="Option D">
-
-    </div>
-
-    <select class="correct-select text-input">
-      <option value="0">Correct answer: A</option>
-      <option value="1">Correct answer: B</option>
-      <option value="2">Correct answer: C</option>
-      <option value="3">Correct answer: D</option>
-    </select>
-  `;
-
-  list.appendChild(card);
-
-  card
-    .querySelector(".remove-question")
-    .addEventListener("click", () => {
-
-      card.remove();
-      renumberQuestions();
-
-    });
-
-  updateQuestionCount();
-}
-
-
-function renumberQuestions(){
-
-  document
-    .querySelectorAll(".question-editor")
-    .forEach((card,index) => {
-
-      card.dataset.question =
-        String(index + 1);
-
-      const title =
-        card.querySelector(
-          ".question-editor-top strong"
-        );
-
-      if(title){
-        title.textContent =
-          `Question ${index + 1}`;
-      }
-
-    });
-
-  updateQuestionCount();
-}
-
-
-function updateQuestionCount(){
-
-  const list =
-    document.getElementById("questionList");
-
-  const count =
-    document.getElementById("questionCount");
-
-  if(!list || !count) return;
-
-  count.textContent =
-    list.children.length;
-}
-
-
-/* =====================================================
-   COLLECT QUIZ
-===================================================== */
-
-function collectQuiz(){
-
-  const titleInput =
-    document.getElementById("quizTitle");
-
-  const title =
-    titleInput?.value.trim();
-
-  if(!title){
-
-    toast("Add a quiz title first.");
-    return null;
-  }
-
-
-  const cards =
-    [...document.querySelectorAll(
-      ".question-editor"
-    )];
-
-  if(cards.length === 0){
-
-    toast("Add at least one question.");
-    return null;
-  }
-
-
-  const questions = [];
-
-
-  for(let i=0;i<cards.length;i++){
-
-    const card = cards[i];
-
-    const question =
-      card
-        .querySelector(".question-text")
-        ?.value
-        .trim();
-
-    const options =
-      [...card.querySelectorAll(
-        ".option-input"
-      )]
-      .map(input => input.value.trim());
-
-    const correct =
-      Number(
-        card
-          .querySelector(".correct-select")
-          ?.value || 0
-      );
-
-
-    if(!question){
-
-      toast(
-        `Add text to question ${i+1}.`
-      );
-
-      return null;
-    }
-
-
-    if(options.some(option => !option)){
-
-      toast(
-        `Complete all options in question ${i+1}.`
-      );
-
-      return null;
-    }
-
-
-    questions.push({
-      question,
-      options,
-      correct
-    });
-
-  }
-
-
-  return {
-    title,
-    questions
-  };
-}
-
-
-/* =====================================================
-   PUBLISH QUIZ
-===================================================== */
-
-async function publishQuiz(){
-
-  const quiz =
-    collectQuiz();
-
-  if(!quiz) return;
-
-
-  const user =
-    currentUser ||
-    await ensureAnonymousUser();
-
-  if(!user){
-
-    toast(
-      "Please enable creator access first."
-    );
-
-    return;
-  }
-
-
-  const publishBtn =
-    document.getElementById("publishBtn");
-
-  if(publishBtn){
-
-    publishBtn.disabled = true;
-    publishBtn.textContent =
-      "Publishing…";
-  }
-
-
-  try{
-
-    const id =
-      "quiz_" +
-      Date.now().toString(36) +
-      "_" +
-      Math.random()
-        .toString(36)
-        .slice(2,8);
-
-
-    const {
-      error
-    } = await supabaseClient
-      .from("quizzes")
-      .insert({
-        id,
-        owner_id:user.id,
-        title:quiz.title
-      });
-
-
-    if(error){
-
-      console.error(error);
-
-      toast(
-        "Could not publish quiz."
-      );
-
-      return;
-    }
-
-
-    lastQuizId = id;
-
-
-    const encoded =
-      btoa(
-        unescape(
-          encodeURIComponent(
-            JSON.stringify({
-              id,
-              ...quiz
-            })
-          )
-        )
-      );
-
-
-    const url =
-      window.location.origin +
-      window.location.pathname +
-      "#quiz=" +
-      encoded;
-
-
-    const shareUrl =
-      document.getElementById("shareUrl");
-
-    if(shareUrl){
-      shareUrl.value = url;
-    }
-
-
-    showScreen("shareResult");
-
-    toast("Quiz published! 🎉");
-
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      "Something went wrong."
-    );
-
-  }finally{
-
-    if(publishBtn){
-
-      publishBtn.disabled = false;
-      publishBtn.textContent =
-        "Publish quiz ✨";
-
-    }
-
-  }
-}
-</script><script>
-/* =====================================================
-   SHARED QUIZ LOADING
-===================================================== */
-
-function decodeQuizData(encoded){
-
-  try{
-
-    const json =
-      decodeURIComponent(
-        escape(
-          atob(encoded)
-        )
-      );
-
-    return JSON.parse(json);
-
-  }catch(error){
-
-    console.error(
-      "Quiz decode error:",
-      error
-    );
-
-    return null;
-  }
-}
-
-
-function loadSharedQuiz(){
-
-  const hash =
-    window.location.hash;
-
-  if(!hash.startsWith("#quiz=")){
-    return false;
-  }
-
-  const encoded =
-    hash.substring(6);
-
-  if(!encoded){
-    return false;
-  }
-
-  const quiz =
-    decodeQuizData(encoded);
-
-  if(!quiz || !quiz.questions?.length){
-
-    toast(
-      "This quiz link is invalid."
-    );
-
-    return false;
-  }
-
-  currentQuiz = quiz;
-  currentQuestionIndex = 0;
-  currentAnswers = [];
-
-  showScreen("playQuiz");
-
-  renderQuizQuestion();
-
-  return true;
-}
-
-
-/* =====================================================
-   RENDER QUIZ QUESTION
-===================================================== */
-
-function renderQuizQuestion(){
-
-  if(!currentQuiz) return;
-
-  const question =
-    currentQuiz.questions[
-      currentQuestionIndex
-    ];
-
-  if(!question){
-
-    finishQuiz();
-
-    return;
-  }
-
-
-  const total =
-    currentQuiz.questions.length;
-
-  const current =
-    currentQuestionIndex + 1;
-
-
-  const title =
-    document.getElementById("playTitle");
-
-  const card =
-    document.getElementById("playQuestion");
-
-  const progress =
-    document.getElementById("quizProgress");
-
-  const progressText =
-    document.getElementById(
-      "quizProgressText"
-    );
-
-
-  if(title){
-    title.textContent =
-      currentQuiz.title;
-  }
-
-
-  if(progress){
-
-    progress.style.width =
-      `${(current / total) * 100}%`;
-
-  }
-
-
-  if(progressText){
-
-    progressText.textContent =
-      `${current} / ${total}`;
-
-  }
-
-
-  if(!card) return;
-
-
-  card.innerHTML = `
-
-    <div class="question-number">
-      Question ${current}
-    </div>
-
-    <h2 class="play-question-title">
-      ${escapeHtml(question.question)}
-    </h2>
-
-    <div class="answer-list">
-
-      ${question.options.map(
-        (option,index) => `
-
-          <button
-            type="button"
-            class="answer-btn"
-            data-answer="${index}">
-
-            <span class="answer-letter">
-              ${String.fromCharCode(65 + index)}
-            </span>
-
-            <span>
-              ${escapeHtml(option)}
-            </span>
-
-          </button>
-
-        `
-      ).join("")}
-
-    </div>
-  `;
-
-
-  card
-    .querySelectorAll(".answer-btn")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          const answer =
-            Number(
-              button.dataset.answer
-            );
-
-          selectAnswer(answer);
-
-        }
-      );
-
-    });
-}
-
-
-/* =====================================================
-   SELECT ANSWER
-===================================================== */
-
-function selectAnswer(answer){
-
-  if(!currentQuiz) return;
-
-
-  currentAnswers[
-    currentQuestionIndex
-  ] = answer;
-
-
-  const buttons =
-    document.querySelectorAll(
-      ".answer-btn"
-    );
-
-
-  buttons.forEach(button => {
-
-    button.disabled = true;
-
-    if(
-      Number(button.dataset.answer) === answer
-    ){
-
-      button.classList.add("selected");
-
-    }
-
-  });
-
-
-  setTimeout(() => {
-
-    currentQuestionIndex++;
-
-    renderQuizQuestion();
-
-  }, 260);
-}
-
-
-/* =====================================================
-   FINISH QUIZ
-===================================================== */
-
-async function finishQuiz(){
-
-  if(!currentQuiz) return;
-
-
-  let score = 0;
-
-
-  currentQuiz.questions.forEach(
-    (question,index) => {
-
-      if(
-        currentAnswers[index] ===
-        question.correct
-      ){
-
-        score++;
-
-      }
-
-    }
-  );
-
-
-  showScreen("quizComplete");
-
-
-  const title =
-    document.getElementById(
-      "completeTitle"
-    );
-
-  const message =
-    document.getElementById(
-      "completeMessage"
-    );
-
-  const scoreBox =
-    document.getElementById(
-      "scoreBox"
-    );
-
-
-  if(title){
-    title.textContent =
-      "Quiz completed! 🎉";
-  }
-
-
-  if(message){
-    message.textContent =
-      "Your answers have been submitted.";
-  }
-
-
-  if(scoreBox){
-
-    scoreBox.innerHTML = `
-
-      <div class="score-number">
-        ${score}/${currentQuiz.questions.length}
-      </div>
-
-      <div class="score-label">
-        Your score
-      </div>
-
-    `;
-
-  }
-
-
-  await submitQuiz(score);
-}
-
-
-/* =====================================================
-   SUBMIT RESPONSE
-===================================================== */
-
-async function submitQuiz(score){
-
-  if(!currentQuiz) return;
-
-
-  try{
-
-    const name =
-      prompt(
-        "Enter your name for the quiz:"
-      );
-
-
-    const safeName =
-      name?.trim() ||
-      "Anonymous";
-
-
-    const {
-      error
-    } = await supabaseClient
-      .from("responses")
-      .insert({
-
-        quiz_id:
-          currentQuiz.id,
-
-        name:
-          safeName,
-
-        answers:{
-
-          selected:
-            currentAnswers,
-
-          score:
-
-            score,
-
-          total:
-            currentQuiz.questions.length
-
-        }
-
-      });
-
-
-    if(error){
-
-      console.error(
-        "Response insert error:",
-        error
-      );
-
-      toast(
-        "Quiz finished, but response could not be saved."
-      );
-
-      return;
-    }
-
-
-    toast(
-      "Your response was saved! 💜"
-    );
-
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      "Quiz finished successfully."
-    );
-
-  }
-}
-
-
-/* =====================================================
-   COPY SHARE LINK
-===================================================== */
-
-async function copyShareLink(){
-
-  const input =
-    document.getElementById(
-      "shareUrl"
-    );
-
-  if(!input?.value){
-
-    toast(
-      "No share link available."
-    );
-
-    return;
-  }
-
-
-  try{
-
-    await navigator.clipboard.writeText(
-      input.value
-    );
-
-    toast(
-      "Link copied! 🔗"
-    );
-
-  }catch(error){
-
-    input.select();
-
-    document.execCommand("copy");
-
-    toast(
-      "Link copied! 🔗"
-    );
-
-  }
-}
-
-
-/* =====================================================
-   MY CREATIONS
-===================================================== */
-
-async function myCreations(){
-
-  showScreen("myCreations");
-
-
-  const list =
-    document.getElementById(
-      "creationsList"
-    );
-
-  if(!list) return;
-
-
-  list.innerHTML = `
-    <div class="loading-card">
-      Loading your creations…
-    </div>
-  `;
-
-
-  const user =
-    currentUser ||
-    await ensureAnonymousUser();
-
-
-  if(!user){
-
-    list.innerHTML = `
-      <div class="empty-card">
-        <div class="empty-icon">🔐</div>
-        <h3>Creator access unavailable</h3>
-        <p>
-          Please try again later.
-        </p>
-      </div>
-    `;
-
-    return;
-  }
-
-
-  try{
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("quizzes")
-      .select("*")
-      .eq(
-        "owner_id",
-        user.id
-      )
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-    if(error){
-      throw error;
-    }
-
-
-    if(!data?.length){
-
-      list.innerHTML = `
-        <div class="empty-card">
-          <div class="empty-icon">🎮</div>
-          <h3>No creations yet</h3>
-          <p>
-            Create your first quiz and share it.
-          </p>
-
-          <button
-            class="primary-btn"
-            type="button"
-            data-action="startCreate"
-            data-type="quiz">
-            Create quiz
-          </button>
-        </div>
-      `;
-
-      return;
-    }
-
-
-    list.innerHTML =
-      data.map(quiz => `
-
-        <div class="creation-card">
-
-          <div class="creation-icon">
-            🧠
-          </div>
-
-          <div class="creation-info">
-
-            <h3>
-              ${escapeHtml(quiz.title)}
-            </h3>
-
-            <p>
-              Created
-              ${formatDate(quiz.created_at)}
-            </p>
-
-          </div>
-
-          <button
-            class="small-action"
-            type="button"
-            data-response-id="${escapeHtml(quiz.id)}">
-            Responses
-          </button>
-
-        </div>
-
-      `).join("");
-
-
-    list
-      .querySelectorAll(
-        "[data-response-id]"
-      )
-      .forEach(button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            openResponses(
-              button.dataset.responseId
-            );
-
-          }
-        );
-
-      });
-
-
-  }catch(error){
-
-    console.error(error);
-
-    list.innerHTML = `
-      <div class="empty-card">
-        <div class="empty-icon">⚠️</div>
-        <h3>Couldn't load creations</h3>
-        <p>
-          Please try again.
-        </p>
-      </div>
-    `;
-
-  }
-}
-
-
-/* =====================================================
-   OPEN RESPONSES
-===================================================== */
-
-async function openResponses(quizId){
-
-  currentResponseQuizId =
-    quizId;
-
-  showScreen("responses");
-
-
-  const list =
-    document.getElementById(
-      "responsesList"
-    );
-
-  if(!list) return;
-
-
-  list.innerHTML = `
-    <div class="loading-card">
-      Loading responses…
-    </div>
-  `;
-
-
-  const user =
-    currentUser ||
-    await ensureAnonymousUser();
-
-
-  if(!user){
-
-    toast(
-      "Creator access unavailable."
-    );
-
-    return;
-  }
-
-
-  try{
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("responses")
-      .select("*")
-      .eq(
-        "quiz_id",
-        quizId
-      )
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
-      );
-
-
-    if(error){
-      throw error;
-    }
-
-
-    if(!data?.length){
-
-      list.innerHTML = `
-        <div class="empty-card">
-          <div class="empty-icon">📭</div>
-          <h3>No responses yet</h3>
-          <p>
-            Share your quiz to start receiving answers.
-          </p>
-        </div>
-      `;
-
-      return;
-    }
-
-
-    list.innerHTML =
-      data.map(response => {
-
-        const answers =
-          response.answers || {};
-
-        const score =
-          Number(
-            answers.score || 0
-          );
-
-        const total =
-          Number(
-            answers.total || 0
-          );
-
-
-        return `
-
-          <div class="response-card">
-
-            <div class="response-avatar">
-              ${escapeHtml(
-                (response.name || "A")
-                  .charAt(0)
-                  .toUpperCase()
-              )}
-            </div>
-
-            <div class="response-info">
-
-              <strong>
-                ${escapeHtml(
-                  response.name ||
-                  "Anonymous"
-                )}
-              </strong>
-
-              <span>
-                Score:
-                ${score}/${total}
-              </span>
-
-              <small>
-                ${formatDate(
-                  response.created_at
-                )}
-              </small>
-
-            </div>
-
-          </div>
-
-        `;
-
-      }).join("");
-
-
-  }catch(error){
-
-    console.error(error);
-
-    list.innerHTML = `
-      <div class="empty-card">
-        <div class="empty-icon">⚠️</div>
-        <h3>Couldn't load responses</h3>
-        <p>
-          Please try again.
-        </p>
-      </div>
-    `;
-
-  }
-}
-
-
-/* =====================================================
-   CREATOR LOGIN
-===================================================== */
-
-function ownerLogin(){
-
-  openModal(`
-
-    <div class="modal-icon">
-      🔐
-    </div>
-
-    <h2>Creator access</h2>
-
-    <p>
-      FUNVEXA currently uses anonymous creator
-      access for quick quiz creation.
-    </p>
-
-    <p class="muted">
-      Your creations are available on this
-      browser while the anonymous session remains active.
-    </p>
-
-    <button
-      class="primary-btn full-btn"
-      type="button"
-      data-action="closeModal">
-      Got it
-    </button>
-
-  `);
-}
-
-
-/* =====================================================
-   PROFILE
-===================================================== */
-
-async function createProfile(){
-
-  const user =
-    currentUser ||
-    await ensureAnonymousUser();
-
-  const name =
-    user?.user_metadata?.name;
-
-  const profileName =
-    document.getElementById(
-      "profileName"
-    );
-
-  if(profileName){
-
-    profileName.textContent =
-      name ||
-      "Your FUNVEXA";
-
-  }
-
-}
-
-
-/* =====================================================
-   HELPERS
-===================================================== */
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-
-function formatDate(value){
-
-  if(!value) return "recently";
-
-  const date =
-    new Date(value);
-
-  if(Number.isNaN(date.getTime())){
-    return "recently";
-  }
-
-  return date.toLocaleDateString(
-    "en-IN",
-    {
-      day:"numeric",
-      month:"short",
-      year:"numeric"
-    }
-  );
-}
-
-
-/* =====================================================
-   EVENT DELEGATION
-===================================================== */
-
-document.addEventListener(
-  "click",
-  event => {
-
-    const element =
-      event.target.closest(
-        "[data-action]"
-      );
-
-    if(!element) return;
-
-
-    const action =
-      element.dataset.action;
-
-
-    if(action === "show"){
-
-      showScreen(
-        element.dataset.target
-      );
-
-      return;
-    }
-
-
-    if(action === "startCreate"){
-
-      startCreate(
-        element.dataset.type ||
-        "quiz"
-      );
-
-      return;
-    }
-
-
-    if(action === "addQuestion"){
-
-      addQuestion();
-
-      return;
-    }
-
-
-    if(action === "publishQuiz"){
-
-      publishQuiz();
-
-      return;
-    }
-
-
-    if(action === "copyShareLink"){
-
-      copyShareLink();
-
-      return;
-    }
-
-
-    if(action === "myCreations"){
-
-      myCreations();
-
-      return;
-    }
-
-
-    if(action === "ownerLogin"){
-
-      ownerLogin();
-
-      return;
-    }
-
-
-    if(action === "closeModal"){
-
-      closeModal();
-
-      return;
-    }
-
-  }
-);
-
-
-/* =====================================================
-   HASH CHANGE
-===================================================== */
-
-window.addEventListener(
-  "hashchange",
-  () => {
-
-    loadSharedQuiz();
-
-  }
-);
-
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
-async function init(){
-
-  setupLogos();
-
-  await ensureAnonymousUser();
-
-  createProfile();
-
-  const loaded =
-    loadSharedQuiz();
-
-  if(!loaded){
-
-    showScreen("home");
-
-  }
-
-}
-
-
-init();
-      </script><script>
-/* =====================================================
-   EXTRA CREATOR FEATURES
-===================================================== */
-
-/* Open a quiz directly from My Creations */
-
-async function openCreatedQuiz(quizId){
-
-  if(!quizId) return;
-
-  try{
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("quizzes")
-      .select("*")
-      .eq("id",quizId)
-      .single();
-
-    if(error) throw error;
-
-    if(!data){
-
-      toast("Quiz not found.");
-      return;
-    }
-
-    lastQuizId = quizId;
-
-    const encoded =
-      btoa(
-        unescape(
-          encodeURIComponent(
-            JSON.stringify({
-              id:data.id,
-              title:data.title,
-              questions:[]
-            })
-          )
-        )
-      );
-
-    const url =
-      window.location.origin +
-      window.location.pathname +
-      "#quiz=" + encoded;
-
-    await copyText(url);
-
-    toast("Quiz link copied! 🔗");
-
-  }catch(error){
-
-    console.error(error);
-    toast("Couldn't open quiz.");
-
-  }
-}
-
-
-/* =====================================================
-   COPY TEXT HELPER
-===================================================== */
-
-async function copyText(text){
-
-  try{
-
-    if(
-      navigator.clipboard &&
-      window.isSecureContext
-    ){
-
-      await navigator.clipboard.writeText(text);
-      return true;
-
-    }
-
-  }catch(error){
-
-    console.warn(
-      "Clipboard API failed:",
-      error
-    );
-
-  }
-
-
-  try{
-
-    const textarea =
-      document.createElement("textarea");
-
-    textarea.value = text;
-
-    textarea.style.position = "fixed";
-    textarea.style.opacity = "0";
-
-    document.body.appendChild(textarea);
-
-    textarea.focus();
-    textarea.select();
-
-    const success =
-      document.execCommand("copy");
-
-    textarea.remove();
-
-    return success;
-
-  }catch(error){
-
-    console.error(error);
-    return false;
-
-  }
-}
-
-
-/* =====================================================
-   SHARE QUIZ
-===================================================== */
-
-async function shareQuiz(){
-
-  const input =
-    document.getElementById("shareUrl");
-
-  if(!input?.value){
-
-    toast("No quiz link available.");
-    return;
-
-  }
-
-
-  const url =
-    input.value;
-
-
-  if(
-    navigator.share
-  ){
-
-    try{
-
-      await navigator.share({
-
-        title:
-          currentQuiz?.title ||
-          "FUNVEXA Quiz",
-
-        text:
-          "Try my FUNVEXA quiz! 🎮",
-
-        url
-
-      });
-
-      return;
-
-    }catch(error){
-
-      if(error.name === "AbortError"){
-        return;
-      }
-
-    }
-
-  }
-
-
-  const copied =
-    await copyText(url);
-
-  toast(
-    copied
-      ? "Link copied! 🔗"
-      : "Copy the link manually."
-  );
-}
-
-
-/* =====================================================
-   IMPROVED SHARE SCREEN
-===================================================== */
-
-function showPublishedQuiz(url,title){
-
-  const input =
-    document.getElementById(
-      "shareUrl"
-    );
-
-  const titleBox =
-    document.querySelector(
-      "#shareResult h2"
-    );
-
-  if(input){
-    input.value = url;
-  }
-
-  if(titleBox){
-    titleBox.textContent =
-      "Your quiz is live! 🎉";
-  }
-
-  showScreen("shareResult");
-}
-
-
-/* =====================================================
-   RESET CREATOR
-===================================================== */
-
-function resetCreator(){
-
-  const title =
-    document.getElementById(
-      "quizTitle"
-    );
-
-  const list =
-    document.getElementById(
-      "questionList"
-    );
-
-  const message =
-    document.getElementById(
-      "creatorMessage"
-    );
-
-
-  if(title){
-    title.value = "";
-  }
-
-  if(list){
-    list.innerHTML = "";
-  }
-
-  if(message){
-    message.textContent = "";
-  }
-
-  addQuestion();
-}
-
-
-/* =====================================================
-   KEYBOARD SUPPORT
-===================================================== */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if(event.key === "Escape"){
-
-      const modal =
-        document.getElementById(
-          "modal"
-        );
-
-      if(
-        modal &&
-        modal.classList.contains("show")
-      ){
-
-        closeModal();
-
-      }
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   NAVIGATION HELPERS
-===================================================== */
-
-function goHome(){
-
-  window.location.hash = "";
-
-  showScreen("home");
-
-}
-
-
-function goExplore(){
-
-  window.location.hash = "";
-
-  showScreen("explore");
-
-}
-
-
-function goCreate(){
-
-  window.location.hash = "";
-
-  showScreen("create");
-
-}
-
-
-function goNotifications(){
-
-  window.location.hash = "";
-
-  showScreen("notifications");
-
-}
-
-
-function goProfile(){
-
-  window.location.hash = "";
-
-  showScreen("profile");
-
-  createProfile();
-
-}
-
-
-/* =====================================================
-   BOTTOM NAV
-===================================================== */
-
-document
-  .querySelectorAll(".bottomnav .navitem")
-  .forEach(item => {
-
-    item.addEventListener(
-      "click",
-      () => {
-
-        const target =
-          item.dataset.target;
-
-        const type =
-          item.dataset.type;
-
-        if(
-          item.dataset.action ===
-          "startCreate"
-        ){
-
-          startCreate(
-            type || "quiz"
-          );
-
-          return;
-        }
-
-        if(target){
-
-          showScreen(target);
-
-        }
-
-      }
-    );
-
-  });
-
-
-/* =====================================================
-   IMPROVED SCREEN STATE
-===================================================== */
-
-function updateActiveNav(target){
-
-  document
-    .querySelectorAll(
-      ".bottomnav .navitem"
-    )
-    .forEach(item => {
-
-      item.classList.toggle(
-        "active",
-        item.dataset.target === target
-      );
-
-    });
-
-}
-
-
-/* Replace showScreen behavior with
-   active navigation support. */
-
-const originalShowScreen =
-  showScreen;
-
-
-showScreen = function(id){
-
-  originalShowScreen(id);
-
-  let navTarget = id;
-
-  if(
-    id === "quizCreator" ||
-    id === "create"
-  ){
-
-    navTarget = "create";
-
-  }
-
-  if(
-    id === "myCreations" ||
-    id === "responses"
-  ){
-
-    navTarget = "profile";
-
-  }
-
-  if(
-    id === "playQuiz" ||
-    id === "quizComplete" ||
-    id === "shareResult"
-  ){
-
-    navTarget = null;
-
-  }
-
-  if(navTarget){
-
-    updateActiveNav(navTarget);
-
-  }else{
-
-    document
-      .querySelectorAll(
-        ".bottomnav .navitem"
-      )
-      .forEach(item =>
-        item.classList.remove("active")
-      );
-
-  }
-
-};
-
-
-/* =====================================================
-   MODAL OUTSIDE CLICK
-===================================================== */
-
-document.addEventListener(
-  "click",
-  event => {
-
-    const modal =
-      document.getElementById(
-        "modal"
-      );
-
-    if(!modal) return;
-
-    if(
-      event.target.classList.contains(
-        "modal-backdrop"
-      )
-    ){
-
-      closeModal();
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   ONLINE / OFFLINE STATUS
-===================================================== */
-
-function updateConnection(){
-
-  if(navigator.onLine){
-
-    document.body.classList.remove(
-      "offline"
-    );
-
-  }else{
-
-    document.body.classList.add(
-      "offline"
-    );
-
-    toast(
-      "You're offline. Some features may not work."
-    );
-
-  }
-
-}
-
-
-window.addEventListener(
-  "online",
-  updateConnection
-);
-
-window.addEventListener(
-  "offline",
-  updateConnection
-);
-
-updateConnection();
-
-
-/* =====================================================
-   PREVENT ACCIDENTAL FORM SUBMIT
-===================================================== */
-
-document.addEventListener(
-  "submit",
-  event => {
-
-    event.preventDefault();
-
-  }
-);
-
-
-/* =====================================================
-   SAFE PAGE EXIT STATE
-===================================================== */
-
-window.addEventListener(
-  "beforeunload",
-  event => {
-
-    const creator =
-      document.getElementById(
-        "quizCreator"
-      );
-
-    if(
-      creator &&
-      creator.classList.contains("active")
-    ){
-
-      const title =
-        document.getElementById(
-          "quizTitle"
-        )?.value.trim();
-
-      const questions =
-        document.querySelectorAll(
-          ".question-editor"
-        ).length;
-
-      if(title || questions > 1){
-
-        event.preventDefault();
-
-      }
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   FINAL STARTUP CHECK
-===================================================== */
-
-function finalStartupCheck(){
-
-  setupLogos();
-
-  updateQuestionCount();
-
-  if(
-    !window.supabase
-  ){
-
-    toast(
-      "Supabase could not be loaded."
-    );
-
-    return false;
-
-  }
-
-  return true;
-}
-
-
-finalStartupCheck();
-      </script><script>
-/* =====================================================
-   FUNVEXA — POLISH / UX
-===================================================== */
-
-
-/* Smoothly focus important creator fields */
-
-function focusQuizTitle(){
-
-  const input =
-    document.getElementById("quizTitle");
-
-  if(!input) return;
-
-  setTimeout(() => {
-    input.focus();
-  },120);
-
-}
-
-
-/* When creator opens, focus title */
-
-document.addEventListener(
-  "click",
-  event => {
-
-    const button =
-      event.target.closest(
-        '[data-action="startCreate"]'
-      );
-
-    if(!button) return;
-
-    if(
-      button.dataset.type === "quiz"
-    ){
-
-      setTimeout(
-        focusQuizTitle,
-        150
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   QUESTION AUTO-SAVE IN CURRENT SESSION
-===================================================== */
-
-let creatorDraft = {
-  title:"",
-  questions:[]
-};
-
-
-function saveCreatorDraft(){
-
-  const title =
-    document.getElementById(
-      "quizTitle"
-    )?.value || "";
-
-
-  const cards =
-    [...document.querySelectorAll(
-      ".question-editor"
-    )];
-
-
-  creatorDraft = {
-
-    title,
-
-    questions:
-      cards.map(card => {
-
-        const inputs =
-          [...card.querySelectorAll(
-            ".option-input"
-          )];
-
-        return {
-
-          question:
-            card.querySelector(
-              ".question-text"
-            )?.value || "",
-
-          options:
-            inputs.map(
-              input => input.value || ""
-            ),
-
-          correct:
-            Number(
-              card.querySelector(
-                ".correct-select"
-              )?.value || 0
-            )
-
-        };
-
-      })
-
-  };
-
-}
-
-
-/* Save while typing */
-
-document.addEventListener(
-  "input",
-  event => {
-
-    if(
-      event.target.closest(
-        "#quizCreator"
-      )
-    ){
-
-      saveCreatorDraft();
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   RESTORE DRAFT
-===================================================== */
-
-function restoreCreatorDraft(){
-
-  if(
-    !creatorDraft.title &&
-    !creatorDraft.questions.length
-  ){
-
-    return false;
-
-  }
-
-
-  const title =
-    document.getElementById(
-      "quizTitle"
-    );
-
-  const list =
-    document.getElementById(
-      "questionList"
-    );
-
-
-  if(!title || !list){
-    return false;
-  }
-
-
-  title.value =
-    creatorDraft.title;
-
-
-  list.innerHTML = "";
-
-
-  creatorDraft.questions.forEach(
-    question => {
-
-      addQuestion();
-
-      const card =
-        list.lastElementChild;
-
-      if(!card) return;
-
-
-      const questionInput =
-        card.querySelector(
-          ".question-text"
-        );
-
-
-      if(questionInput){
-
-        questionInput.value =
-          question.question || "";
-
-      }
-
-
-      const options =
-        [...card.querySelectorAll(
-          ".option-input"
-        )];
-
-
-      options.forEach(
-        (input,index) => {
-
-          input.value =
-            question.options?.[index] ||
-            "";
-
-        }
-      );
-
-
-      const correct =
-        card.querySelector(
-          ".correct-select"
-        );
-
-
-      if(correct){
-
-        correct.value =
-          String(
-            question.correct || 0
-          );
-
-      }
-
-    }
-  );
-
-
-  updateQuestionCount();
-
-  return true;
-
-}
-
-
-/* =====================================================
-   CREATOR BUTTON IMPROVEMENTS
-===================================================== */
-
-function setCreatorMessage(
-  message,
-  type="info"
-){
-
-  const box =
-    document.getElementById(
-      "creatorMessage"
-    );
-
-  if(!box) return;
-
-  box.textContent =
-    message;
-
-  box.className =
-    "form-message " + type;
-
-}
-
-
-/* =====================================================
-   VALIDATE DUPLICATE OPTIONS
-===================================================== */
-
-function validateOptions(options){
-
-  const cleaned =
-    options.map(
-      option =>
-        option
-          .trim()
-          .toLowerCase()
-    );
-
-
-  const unique =
-    new Set(cleaned);
-
-
-  return unique.size ===
-    cleaned.length;
-
-}
-
-
-/* =====================================================
-   IMPROVED QUIZ COLLECTION
-===================================================== */
-
-const originalCollectQuiz =
-  collectQuiz;
-
-
-collectQuiz = function(){
-
-  const quiz =
-    originalCollectQuiz();
-
-  if(!quiz){
-    return null;
-  }
-
-
-  for(
-    let i=0;
-    i<quiz.questions.length;
-    i++
-  ){
-
-    const options =
-      quiz.questions[i].options;
-
-
-    if(
-      !validateOptions(options)
-    ){
-
-      toast(
-        `Options in question ${i+1} must be different.`
-      );
-
-      return null;
-
-    }
-
-  }
-
-
-  return quiz;
-
-};
-
-
-/* =====================================================
-   ADD QUESTION LIMIT
-===================================================== */
-
-const originalAddQuestion =
-  addQuestion;
-
-
-addQuestion = function(){
-
-  const list =
-    document.getElementById(
-      "questionList"
-    );
-
-
-  if(
-    list &&
-    list.children.length >= 20
-  ){
-
-    toast(
-      "You can add up to 20 questions."
-    );
-
-    return;
-
-  }
-
-
-  originalAddQuestion();
-
-  saveCreatorDraft();
-
-};
-
-
-/* =====================================================
-   CREATOR RESET SAFELY
-===================================================== */
-
-const originalOpenQuizCreator =
-  openQuizCreator;
-
-
-openQuizCreator = function(){
-
-  const restored =
-    restoreCreatorDraft();
-
-
-  if(restored){
-
-    showScreen("quizCreator");
-
-    updateQuestionCount();
-
-    focusQuizTitle();
-
-    return;
-
-  }
-
-
-  originalOpenQuizCreator();
-
-  focusQuizTitle();
-
-};
-
-
-/* =====================================================
-   CLEAR DRAFT AFTER PUBLISH
-===================================================== */
-
-const originalPublishQuiz =
-  publishQuiz;
-
-
-publishQuiz = async function(){
-
-  const result =
-    await originalPublishQuiz();
-
-  if(lastQuizId){
-
-    creatorDraft = {
-      title:"",
-      questions:[]
-    };
-
-  }
-
-  return result;
-
-};
-
-
-/* =====================================================
-   QUIZ ANSWER ANIMATION
-===================================================== */
-
-function animateAnswer(button){
-
-  if(!button) return;
-
-  button.classList.remove(
-    "answer-pop"
-  );
-
-
-  requestAnimationFrame(() => {
-
-    button.classList.add(
-      "answer-pop"
-    );
-
-  });
-
-}
-
-
-/* Add animation to selected answer */
-
-const originalSelectAnswer =
-  selectAnswer;
-
-
-selectAnswer = function(answer){
-
-  const buttons =
-    document.querySelectorAll(
-      ".answer-btn"
-    );
-
-
-  buttons.forEach(button => {
-
-    if(
-      Number(
-        button.dataset.answer
-      ) === answer
-    ){
-
-      animateAnswer(button);
-
-    }
-
-  });
-
-
-  originalSelectAnswer(answer);
-
-};
-
-
-/* =====================================================
-   SHARE BUTTON SUPPORT
-===================================================== */
-
-document.addEventListener(
-  "click",
-  event => {
-
-    const button =
-      event.target.closest(
-        '[data-action="shareQuiz"]'
-      );
-
-    if(!button) return;
-
-    shareQuiz();
-
-  }
-);
-
-
-/* =====================================================
-   HOME CTA
-===================================================== */
-
-document.addEventListener(
-  "click",
-  event => {
-
-    const button =
-      event.target.closest(
-        '[data-action="homeCreate"]'
-      );
-
-    if(!button) return;
-
-    startCreate("quiz");
-
-  }
-);
-
-
-/* =====================================================
-   CREATION CARD SHARE
-===================================================== */
-
-document.addEventListener(
-  "click",
-  event => {
-
-    const button =
-      event.target.closest(
-        "[data-share-quiz]"
-      );
-
-    if(!button) return;
-
-
-    const quizId =
-      button.dataset.shareQuiz;
-
-
-    if(!quizId) return;
-
-
-    toast(
-      "Quiz sharing is ready from its published link."
-    );
-
-  }
-);
-
-
-/* =====================================================
-   CONNECTION STATUS UI
-===================================================== */
-
-function addConnectionIndicator(){
-
-  if(
-    document.getElementById(
-      "connectionIndicator"
-    )
-  ){
-
-    return;
-
-  }
-
-
-  const indicator =
-    document.createElement("div");
-
-
-  indicator.id =
-    "connectionIndicator";
-
-
-  indicator.innerHTML = `
-    <span></span>
-    <strong>Online</strong>
-  `;
-
-
-  document.body.appendChild(
-    indicator
-  );
-
-
-  function refresh(){
-
-    const online =
-      navigator.onLine;
-
-
-    indicator.classList.toggle(
-      "offline",
-      !online
-    );
-
-
-    const label =
-      indicator.querySelector(
-        "strong"
-      );
-
-
-    if(label){
-
-      label.textContent =
-        online
-          ? "Online"
-          : "Offline";
-
-    }
-
-  }
-
-
-  window.addEventListener(
-    "online",
-    refresh
-  );
-
-
-  window.addEventListener(
-    "offline",
-    refresh
-  );
-
-
-  refresh();
-
-}
-
-
-/* =====================================================
-   REDUCED MOTION
-===================================================== */
-
-function respectReducedMotion(){
-
-  const reduced =
-    window.matchMedia &&
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-
-  if(reduced){
-
-    document.documentElement
-      .classList.add(
-        "reduced-motion"
-      );
-
-  }
-
-}
-
-
-/* =====================================================
-   INITIAL POLISH
-===================================================== */
-
-respectReducedMotion();
-addConnectionIndicator();
-
-      </script><style>
-/* =====================================================
-   FINAL FUNVEXA POLISH
-===================================================== */
 
 .screen{
   display:none;
@@ -5004,731 +122,1874 @@ addConnectionIndicator();
 
 .screen.active{
   display:block;
-  animation:screenIn .22s ease;
 }
 
-@keyframes screenIn{
-  from{
-    opacity:0;
-    transform:translateY(6px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+.card{
+  background:rgba(255,255,255,.88);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:30px;
+  padding:22px;
+  box-shadow:0 18px 50px rgba(90,40,80,.09);
 }
 
+/* HERO */
 
-/* CREATE CARDS */
+.hero{
+  text-align:center;
+}
 
-.create-grid{
+.logo-hero{
+  width:78px;
+  height:78px;
+  margin:0 auto 8px;
+}
+
+.hero h1{
+  margin:2px 0 0;
+  font-size:27px;
+  letter-spacing:-1px;
+}
+
+.hero .sub{
+  margin:2px 0 20px;
+  color:#9a7890;
+  font-size:12px;
+  font-weight:700;
+}
+
+.hero-copy strong{
+  display:block;
+  font-size:34px;
+  line-height:1.08;
+  letter-spacing:-1.7px;
+}
+
+.hero-copy p{
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.55;
+  margin:20px 5px;
+}
+
+/* BUTTONS */
+
+.btn{
+  border:0;
+  border-radius:18px;
+  padding:14px 18px;
+  font-weight:850;
+  color:white;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  box-shadow:0 10px 24px rgba(238,74,157,.22);
+}
+
+.btn.full{
+  width:100%;
+}
+
+.btn.light{
+  background:#fff;
+  color:var(--ink);
+  border:1px solid var(--line);
+  box-shadow:none;
+}
+
+.btn.small{
+  padding:10px 13px;
+  border-radius:13px;
+  font-size:13px;
+}
+
+/* GAME GRID */
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:28px 3px 12px;
+}
+
+.section-title h2{
+  margin:0;
+  font-size:21px;
+}
+
+.section-title span{
+  color:#9b788e;
+  font-size:13px;
+}
+
+.games{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
 }
 
-.game-card{
-  position:relative;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  width:100%;
-  min-height:108px;
-  padding:16px;
-  border:1px solid #eadce8;
-  border-radius:22px;
+.game{
+  border:1px solid #f0e5ed;
   background:#fff;
-  color:#34263a;
+  border-radius:25px;
+  padding:18px;
+  min-height:145px;
   text-align:left;
-  cursor:pointer;
-  transition:.2s ease;
+  transition:.18s;
 }
 
-.game-card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 12px 28px rgba(100,50,120,.10);
-}
-
-.game-card h3{
-  margin:0 0 4px;
-  font-size:16px;
-}
-
-.game-card p{
-  margin:0;
-  color:#8d7d91;
-  font-size:12px;
-  line-height:1.4;
+.game:active{
+  transform:scale(.97);
 }
 
 .game-icon{
-  width:44px;
-  height:44px;
-  flex:0 0 44px;
+  width:48px;
+  height:48px;
   display:grid;
   place-items:center;
-  border-radius:14px;
-  background:#fff0f8;
-  font-size:22px;
+  border-radius:16px;
+  background:#f1ddff;
+  font-size:25px;
+  margin-bottom:13px;
 }
 
-.arrow{
-  margin-left:auto;
-  color:#a276aa;
-  font-size:20px;
-}
-
-
-/* CREATOR */
-
-.creator-top{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.back-btn{
-  width:42px;
-  height:42px;
-  border:1px solid #eadce8;
-  border-radius:14px;
-  background:#fff;
-  font-size:21px;
-  cursor:pointer;
-}
-
-.creator-card,
-.profile-card,
-.result-card,
-.play-card{
-  padding:20px;
-  border:1px solid #eadce8;
-  border-radius:26px;
-  background:#fff;
-  box-shadow:0 10px 35px rgba(91,45,110,.07);
-}
-
-.field-label{
+.game b{
   display:block;
-  margin-bottom:7px;
-  font-size:13px;
-  font-weight:700;
+  font-size:17px;
 }
 
-.text-input{
-  width:100%;
-  min-height:48px;
-  padding:12px 14px;
-  border:1px solid #e5d9e4;
-  border-radius:14px;
-  outline:none;
+.game small{
+  display:block;
+  color:#8a7182;
+  margin-top:5px;
+}
+
+/* EXPLORE */
+
+.explore-grid{
+  display:grid;
+  gap:12px;
+}
+
+.explore-card{
+  display:flex;
+  align-items:center;
+  gap:14px;
   background:#fff;
-  color:#33263a;
-  font:inherit;
-}
-
-.text-input:focus{
-  border-color:#b36bff;
-  box-shadow:0 0 0 3px rgba(179,107,255,.12);
-}
-
-.creator-divider{
-  height:1px;
-  margin:22px 0;
-  background:#eee4ed;
-}
-
-.question-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:14px;
-}
-
-.count-pill{
-  min-width:32px;
-  padding:6px 10px;
-  border-radius:999px;
-  background:#f4eaff;
-  color:#7b45aa;
-  font-size:12px;
-  font-weight:800;
-  text-align:center;
-}
-
-
-/* QUESTION EDITOR */
-
-.question-editor{
-  margin-bottom:14px;
+  border:1px solid #f0e5ed;
+  border-radius:22px;
   padding:15px;
-  border:1px solid #eadfe9;
-  border-radius:20px;
-  background:#fcfafd;
 }
 
-.question-editor-top{
+.explore-card .game-icon{
+  margin:0;
+  flex:none;
+}
+
+/* HEADERS */
+
+.page-head{
+  margin:8px 2px 18px;
+}
+
+.page-head h2{
+  margin:0;
+  font-size:27px;
+}
+
+.page-head p{
+  margin:5px 0;
+  color:var(--muted);
+}
+
+/* CREATE */
+
+.create-list{
+  display:grid;
+  gap:12px;
+}
+
+.create-type{
+  width:100%;
+  text-align:left;
+  border:1px solid #f0e5ed;
+  background:#fff;
+  border-radius:22px;
+  padding:17px;
   display:flex;
+  gap:14px;
   align-items:center;
-  justify-content:space-between;
+}
+
+.create-type .game-icon{
+  margin:0;
+}
+
+.create-type b{
+  display:block;
+}
+
+.create-type small{
+  color:var(--muted);
+}
+
+/* MAKER */
+
+.field{
+  margin-bottom:14px;
+}
+
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:14px;
+  padding:13px;
+  outline:none;
+  color:var(--ink);
+}
+
+.field textarea{
+  min-height:85px;
+  resize:vertical;
+}
+
+.question-box{
+  background:#fff;
+  border:1px solid #f0e5ed;
+  border-radius:20px;
+  padding:15px;
   margin-bottom:12px;
 }
 
-.remove-question{
-  width:34px;
-  height:34px;
-  border:0;
-  border-radius:10px;
-  background:#fff0f3;
-  color:#d64e70;
-  font-size:20px;
-  cursor:pointer;
-}
-
-.option-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:10px;
-}
-
-.correct-select{
-  margin-top:10px;
-}
-
-.primary-btn,
-.secondary-btn{
-  min-height:48px;
-  padding:12px 18px;
-  border-radius:15px;
-  border:0;
-  font:inherit;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.primary-btn{
-  background:linear-gradient(
-    135deg,
-    #ff4fa3,
-    #8c55ff
-  );
-  color:#fff;
-  box-shadow:0 8px 20px rgba(143,78,220,.20);
-}
-
-.secondary-btn{
-  background:#f7eff8;
-  color:#71417d;
-}
-
-.full-btn{
-  width:100%;
-  margin-top:12px;
-}
-
-.primary-btn:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-}
-
-.form-message{
-  min-height:20px;
-  margin:10px 2px 0;
-  color:#8c7d91;
-  font-size:12px;
-}
-
-
-/* PLAY */
-
-.play-header{
-  margin-bottom:16px;
-}
-
-.progress-wrap{
+.q-top{
   display:flex;
+  justify-content:space-between;
+  gap:8px;
   align-items:center;
-  gap:10px;
-  margin-top:14px;
-}
-
-.progress-track{
-  flex:1;
-  height:8px;
-  overflow:hidden;
-  border-radius:999px;
-  background:#eee6f0;
-}
-
-.progress-bar{
-  width:0;
-  height:100%;
-  border-radius:999px;
-  background:linear-gradient(
-    90deg,
-    #ff4fa3,
-    #8d5cff
-  );
-  transition:width .25s ease;
-}
-
-#quizProgressText{
-  font-size:12px;
-  font-weight:700;
-  color:#8b7c90;
-}
-
-.question-number{
-  margin-bottom:8px;
-  color:#a15ca0;
-  font-size:12px;
-  font-weight:800;
-  text-transform:uppercase;
-}
-
-.play-question-title{
-  margin:0 0 20px;
-  font-size:23px;
-  line-height:1.3;
-}
-
-.answer-list{
-  display:grid;
-  gap:10px;
-}
-
-.answer-btn{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  width:100%;
-  min-height:56px;
-  padding:10px 14px;
-  border:1px solid #e8dce7;
-  border-radius:17px;
-  background:#fff;
-  color:#392d3e;
-  text-align:left;
-  font:inherit;
-  cursor:pointer;
-  transition:.18s ease;
-}
-
-.answer-btn:hover{
-  border-color:#bb8be0;
-  background:#fdf7ff;
-}
-
-.answer-btn.selected{
-  border-color:#a05ae0;
-  background:#f5eaff;
-  transform:scale(.99);
-}
-
-.answer-letter{
-  display:grid;
-  place-items:center;
-  width:34px;
-  height:34px;
-  flex:0 0 34px;
-  border-radius:11px;
-  background:#f4e8f8;
-  color:#7b478c;
-  font-weight:800;
-}
-
-
-/* RESULTS */
-
-.result-icon,
-.empty-icon,
-.modal-icon{
-  font-size:42px;
   margin-bottom:10px;
 }
 
-.score-box{
-  margin:20px 0;
-  padding:20px;
-  border-radius:20px;
-  background:linear-gradient(
-    135deg,
-    #fff0f8,
-    #f1eaff
-  );
-  text-align:center;
-}
-
-.score-number{
-  font-size:38px;
+.q-number{
   font-weight:900;
-  color:#7745a2;
 }
 
-.score-label{
-  margin-top:4px;
-  color:#8e7c93;
+.option-row{
+  display:flex;
+  gap:7px;
+  margin-top:8px;
+}
+
+.option-row input{
+  flex:1;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:11px;
+  min-width:0;
+}
+
+.xbtn{
+  width:42px;
+  border:0;
+  border-radius:12px;
+  background:#ffe8f2;
+}
+
+.msg{
+  color:#d23e74;
   font-size:13px;
+  margin:9px 0;
+  min-height:18px;
 }
 
+/* PLAY */
 
-/* EMPTY STATES */
+.quiz-title{
+  font-size:28px;
+  font-weight:900;
+  line-height:1.1;
+}
 
-.empty-card,
-.loading-card{
-  padding:28px 20px;
-  border:1px dashed #dfd1df;
-  border-radius:24px;
+.progress{
+  height:7px;
+  border-radius:20px;
+  background:#f0dfe9;
+  overflow:hidden;
+  margin:15px 0 20px;
+}
+
+.progress div{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--pink),var(--purple));
+  transition:.2s;
+}
+
+.choice{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  padding:14px;
+  border:1px solid #eee0e9;
   background:#fff;
-  text-align:center;
+  border-radius:15px;
+  margin-top:8px;
 }
 
-.empty-card h3{
-  margin:5px 0;
+.choice input{
+  accent-color:var(--pink);
 }
 
-.empty-card p{
-  color:#8d7d91;
-  font-size:13px;
+/* NOTIFICATIONS */
+
+.notif{
+  background:#fff;
+  border:1px solid #f0e5ed;
+  border-radius:20px;
+  padding:15px;
+  display:flex;
+  gap:12px;
+  margin-bottom:10px;
 }
 
+.notif-icon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  background:#ffe4f1;
+  border-radius:14px;
+}
 
 /* PROFILE */
 
 .profile-card{
+  background:#fff;
+  border:1px solid #f0e5ed;
+  border-radius:24px;
+  padding:20px;
   text-align:center;
 }
 
-.profile-avatar{
-  width:76px;
-  height:76px;
+.avatar{
+  width:70px;
+  height:70px;
+  margin:auto;
+  border-radius:50%;
   display:grid;
   place-items:center;
-  margin:0 auto 12px;
-  border-radius:24px;
-  background:linear-gradient(
-    135deg,
-    #ffb4da,
-    #bca0ff
-  );
-  font-size:32px;
+  background:linear-gradient(135deg,#ffb5d5,#bda1ff);
+  font-size:30px;
 }
 
-.profile-actions{
-  display:grid;
-  gap:10px;
-  margin-top:22px;
+/* SHARE */
+
+.share-box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:15px;
 }
 
-.profile-action{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.share-box input{
   width:100%;
-  padding:14px;
-  border:1px solid #eadfe9;
-  border-radius:18px;
-  background:#fff;
-  text-align:left;
-  cursor:pointer;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  margin-bottom:10px;
 }
 
-.profile-action div{
-  flex:1;
+/* EMPTY */
+
+.empty{
+  text-align:center;
+  padding:30px 15px;
+  color:#90798a;
 }
 
-.profile-action small{
-  display:block;
-  margin-top:3px;
-  color:#918291;
-}
+/* BOTTOM NAV */
 
+.bottomnav{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:min(560px,100vw);
+  z-index:99999;
 
-/* CREATIONS */
-
-.creations-list,
-.responses-list{
   display:grid;
-  gap:10px;
+  grid-template-columns:repeat(5,1fr);
+  gap:3px;
+
+  padding:8px 7px calc(7px + env(safe-area-inset-bottom));
+
+  background:rgba(255,255,255,.96);
+  border-top:1px solid #ead7e3;
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  box-shadow:0 -8px 28px rgba(93,42,112,.12);
 }
 
-.creation-card,
-.response-card{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:14px;
-  border:1px solid #eadfe8;
-  border-radius:19px;
-  background:#fff;
-}
-
-.creation-icon,
-.response-avatar{
-  width:44px;
-  height:44px;
-  flex:0 0 44px;
-  display:grid;
-  place-items:center;
-  border-radius:14px;
-  background:#f5eafa;
-  color:#784493;
-  font-weight:900;
-}
-
-.creation-info,
-.response-info{
-  min-width:0;
-  flex:1;
-}
-
-.creation-info h3{
-  margin:0;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  font-size:15px;
-}
-
-.creation-info p,
-.response-info span,
-.response-info small{
-  display:block;
-  margin:3px 0 0;
-  color:#908190;
-  font-size:11px;
-}
-
-.small-action{
-  padding:8px 11px;
+.navitem{
   border:0;
-  border-radius:11px;
-  background:#f4eafa;
-  color:#714282;
+  background:transparent;
+  color:#806f7e;
+  min-height:62px;
+  border-radius:18px;
   font-size:11px;
   font-weight:800;
-  cursor:pointer;
-}
-
-
-/* TOAST */
-
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:92px;
-  z-index:100000;
-  max-width:calc(100vw - 32px);
-  padding:11px 16px;
-  border-radius:14px;
-  background:#302334;
-  color:#fff;
-  font-size:13px;
-  opacity:0;
-  pointer-events:none;
-  transform:translate(-50%,12px);
-  transition:.22s ease;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
-}
-
-
-/* MODAL */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:200000;
-  display:none;
-}
-
-.modal.show{
-  display:block;
-}
-
-.modal-backdrop{
-  position:absolute;
-  inset:0;
-  background:rgba(35,20,40,.42);
-  backdrop-filter:blur(5px);
-}
-
-.modal-card{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:min(430px,calc(100vw - 28px));
-  padding:24px;
-  border-radius:26px;
-  background:#fff;
-  transform:translate(-50%,-50%);
-  box-shadow:0 25px 70px rgba(30,15,35,.25);
-}
-
-.modal-close{
-  position:absolute;
-  top:10px;
-  right:10px;
-  width:38px;
-  height:38px;
-  border:0;
-  border-radius:12px;
-  background:#f7eff8;
-  color:#6e5871;
-  font-size:23px;
-  cursor:pointer;
-}
-
-
-/* CONNECTION */
-
-#connectionIndicator{
-  position:fixed;
-  top:10px;
-  right:10px;
-  z-index:99998;
   display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:5px;
-  padding:5px 9px;
-  border-radius:999px;
-  background:rgba(240,255,244,.95);
-  color:#34814a;
-  font-size:9px;
-  pointer-events:none;
+  justify-content:center;
+  gap:4px;
 }
 
-#connectionIndicator span{
-  width:6px;
-  height:6px;
+.navitem span{
+  font-size:23px;
+  line-height:1;
+}
+
+.navitem.active{
+  color:#d83c82;
+  background:#fff0f7;
+}
+
+.create-nav{
+  margin-top:-23px;
+  width:58px;
+  height:58px;
   border-radius:50%;
-  background:#4caf68;
+  border:5px solid #fff;
+  background:linear-gradient(135deg,#ff4f9a,#8b5cf6);
+  color:#fff;
+  box-shadow:0 7px 22px rgba(213,60,137,.35);
+  font-size:30px;
 }
 
-#connectionIndicator.offline{
-  background:#fff3f3;
-  color:#ad5555;
-}
+/* RESPONSIVE */
 
-#connectionIndicator.offline span{
-  background:#d85b5b;
-}
-
-
-/* REDUCED MOTION */
-
-.reduced-motion *,
-.reduced-motion *::before,
-.reduced-motion *::after{
-  animation-duration:.001ms!important;
-  animation-iteration-count:1!important;
-  transition-duration:.001ms!important;
-  scroll-behavior:auto!important;
-}
-
-
-/* MOBILE */
-
-@media(max-width:600px){
-
-  .create-grid{
-    grid-template-columns:1fr;
+@media(max-width:380px){
+  .hero-copy strong{
+    font-size:29px;
   }
 
-  .option-grid{
-    grid-template-columns:1fr;
+  .games{
+    gap:9px;
   }
 
-  .game-card{
-    min-height:92px;
+  .game{
+    padding:14px;
   }
-
-  .play-question-title{
-    font-size:21px;
-  }
-
-}
-
-
-/* VERY SMALL PHONES */
-
-@media(max-width:360px){
-
-  .creator-card,
-  .profile-card,
-  .result-card,
-  .play-card{
-    padding:16px;
-  }
-
-  .game-card{
-    padding:13px;
-  }
-
-  .bottomnav{
-    padding-left:5px!important;
-    padding-right:5px!important;
-  }
-
 }
 </style>
+</head>
 
+<body>
+
+<header class="topbar">
+
+  <div class="brand">
+
+    <svg class="brand-logo" viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="logoGradient1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ff4f9a"/>
+          <stop offset="1" stop-color="#8b5cf6"/>
+        </linearGradient>
+      </defs>
+
+      <rect width="100" height="100" rx="27" fill="url(#logoGradient1)"/>
+      <path d="M30 20h45v15H47v12h25v14H47v19H30z" fill="#fff"/>
+    </svg>
+
+    <div>
+      FUNVEXA
+      <span class="brand-sub">Create • Play • Share</span>
+    </div>
+
+  </div>
+
+  <div class="top-actions">
+    <span class="online">● Online</span>
+
+    <button class="top-icon" type="button" id="bellBtn">
+      🔔
+    </button>
+  </div>
+
+</header>
+
+
+<main class="app">
+
+<!-- HOME -->
+
+<section id="home" class="screen active">
+
+  <div class="card">
+
+    <div class="hero">
+
+      <div class="logo-hero">
+
+        <svg viewBox="0 0 100 100" width="78" height="78">
+          <defs>
+            <linearGradient id="heroGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ff4f9a"/>
+              <stop offset="1" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+
+          <rect width="100" height="100" rx="27" fill="url(#heroGradient)"/>
+          <path d="M30 20h45v15H47v12h25v14H47v19H30z" fill="#fff"/>
+        </svg>
+
+      </div>
+
+      <h1>FUNVEXA</h1>
+      <p class="sub">Create • Play • Share</p>
+
+      <div class="hero-copy">
+
+        <strong>
+          Turn your ideas into fun & interactive games! 💗
+        </strong>
+
+        <p>
+          Create quizzes, polls, challenges and personality games.
+          Share them with friends and see what they choose.
+        </p>
+
+      </div>
+
+      <button class="btn full" id="createHero">
+        ✨ Create New
+      </button>
+
+    </div>
+
+
+    <div class="section-title">
+      <h2>Popular Games</h2>
+      <span>Play something fun</span>
+    </div>
+
+
+    <div class="games">
+
+      <button class="game" data-create="quiz">
+        <div class="game-icon">📝</div>
+        <b>Quiz</b>
+        <small>Test your friends</small>
+      </button>
+
+      <button class="game" data-create="poll">
+        <div class="game-icon">📊</div>
+        <b>Poll</b>
+        <small>Ask everyone</small>
+      </button>
+
+      <button class="game" data-create="thisthat">
+        <div class="game-icon">⚡</div>
+        <b>This or That</b>
+        <small>Pick one</small>
+      </button>
+
+      <button class="game" data-create="personality">
+        <div class="game-icon">💫</div>
+        <b>Personality</b>
+        <small>Discover your type</small>
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- EXPLORE -->
+
+<section id="explore" class="screen">
+
+  <div class="card">
+
+    <div class="page-head">
+      <h2>Explore</h2>
+      <p>Choose something fun to create.</p>
+    </div>
+
+    <div class="explore-grid">
+
+      <button class="explore-card" data-create="quiz">
+        <div class="game-icon">📝</div>
+        <div>
+          <b>Quiz</b>
+          <small>Ask questions and collect answers.</small>
+        </div>
+      </button>
+
+      <button class="explore-card" data-create="poll">
+        <div class="game-icon">📊</div>
+        <div>
+          <b>Poll</b>
+          <small>Find out what everyone thinks.</small>
+        </div>
+      </button>
+
+      <button class="explore-card" data-create="thisthat">
+        <div class="game-icon">⚡</div>
+        <div>
+          <b>This or That</b>
+          <small>Give friends two choices.</small>
+        </div>
+      </button>
+
+      <button class="explore-card" data-create="personality">
+        <div class="game-icon">💫</div>
+        <div>
+          <b>Personality</b>
+          <small>Create a fun personality test.</small>
+        </div>
+      </button>
+
+      <button class="explore-card" data-create="wouldrather">
+        <div class="game-icon">🤔</div>
+        <div>
+          <b>Would You Rather</b>
+          <small>Two choices. One answer.</small>
+        </div>
+      </button>
+
+      <button class="explore-card" data-create="emoji">
+        <div class="game-icon">😂</div>
+        <div>
+          <b>Guess The Emoji</b>
+          <small>Turn emojis into clues.</small>
+        </div>
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CREATE -->
+
+<section id="create" class="screen">
+
+  <div class="card">
+
+    <div class="page-head">
+      <h2>Create New</h2>
+      <p>Pick a game format.</p>
+    </div>
+
+    <div class="create-list">
+
+      <button class="create-type" data-create="quiz">
+        <div class="game-icon">📝</div>
+        <div>
+          <b>Quiz</b>
+          <small>Questions with multiple choices</small>
+        </div>
+      </button>
+
+      <button class="create-type" data-create="poll">
+        <div class="game-icon">📊</div>
+        <div>
+          <b>Poll</b>
+          <small>Ask your friends anything</small>
+        </div>
+      </button>
+
+      <button class="create-type" data-create="thisthat">
+        <div class="game-icon">⚡</div>
+        <div>
+          <b>This or That</b>
+          <small>Make two fun choices</small>
+        </div>
+      </button>
+
+      <button class="create-type" data-create="personality">
+        <div class="game-icon">💫</div>
+        <div>
+          <b>Personality</b>
+          <small>Find everyone's type</small>
+        </div>
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- MAKER -->
+
+<section id="maker" class="screen">
+
+  <div class="card">
+
+    <div class="page-head">
+      <h2 id="makerTitle">Create Quiz</h2>
+      <p id="makerSub">Make something people want to answer.</p>
+    </div>
+
+    <div class="field">
+      <label>Game title</label>
+      <input id="gameTitle" placeholder="My Fun Quiz 💗">
+    </div>
+
+    <div id="questions"></div>
+
+    <button class="btn light full" id="addQuestion">
+      + Add Question
+    </button>
+
+    <div class="msg" id="makerMsg"></div>
+
+    <button class="btn full" id="publishBtn">
+      🚀 Create & Share
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- SHARE -->
+
+<section id="share" class="screen">
+
+  <div class="card">
+
+    <div class="page-head">
+      <h2>It's ready! 🎉</h2>
+      <p>Share this link with your friends.</p>
+    </div>
+
+    <div class="share-box">
+
+      <input id="shareLink" readonly>
+
+      <button class="btn full" id="copyBtn">
+        📋 Copy Link
+      </button>
+
+    </div>
+
+    <br>
+
+    <button class="btn light full" id="homeAfterShare">
+      ← Back Home
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- QUIZ -->
+
+<section id="quiz" class="screen">
+
+  <div class="card">
+
+    <div id="quizMode" style="font-size:12px;font-weight:900;color:#d83c82">
+      QUIZ
+    </div>
+
+    <div class="quiz-title" id="quizTitle">
+      Quiz
+    </div>
+
+    <p id="quizDesc" style="color:var(--muted)">
+      Choose your answers.
+    </p>
+
+    <div class="progress">
+      <div id="progress"></div>
+    </div>
+
+    <div id="quizQuestions"></div>
+
+    <div class="field" style="margin-top:20px">
+      <label>Your name</label>
+      <input id="playerName" placeholder="Enter your name">
+    </div>
+
+    <div class="msg" id="submitMsg"></div>
+
+    <button class="btn full" id="submitBtn">
+      Submit Answers 💗
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- DONE -->
+
+<section id="done" class="screen">
+
+  <div class="card" style="text-align:center">
+
+    <div style="font-size:60px">🎉</div>
+
+    <h2>Answer submitted!</h2>
+
+    <p style="color:var(--muted)">
+      Your response has been saved.
+    </p>
+
+    <button class="btn full" id="doneHome">
+      Go Home
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- NOTIFICATIONS -->
+
+<section id="notifications" class="screen">
+
+  <div class="card">
+
+    <div class="page-head">
+      <h2>Notifications 🔔</h2>
+      <p>Updates and activity will appear here.</p>
+    </div>
+
+    <div id="notificationList">
+
+      <div class="notif">
+
+        <div class="notif-icon">✨</div>
+
+        <div>
+          <b>Welcome to FUNVEXA</b>
+          <p style="color:var(--muted);margin:5px 0 0">
+            Create your first game and share it with friends.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="screen">
+
+  <div class="card">
+
+    <div class="page-head">
+      <h2>Profile</h2>
+      <p>Your FUNVEXA creator profile.</p>
+    </div>
+
+    <div class="profile-card">
+
+      <div class="avatar">✨</div>
+
+      <h3 id="profileDisplay">
+        Guest Creator
+      </h3>
+
+      <p style="color:var(--muted)">
+        Create games and share them with friends.
+      </p>
+
+    </div>
+
+    <br>
+
+    <div class="field">
+      <label>Name</label>
+      <input id="profileName" placeholder="Your name">
+    </div>
+
+    <div class="field">
+      <label>Bio</label>
+      <textarea id="profileBio" placeholder="Something about you"></textarea>
+    </div>
+
+    <div class="msg" id="profileMsg"></div>
+
+    <button class="btn full" id="saveProfile">
+      Save Profile
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- RESPONSES -->
+
+<section id="responses" class="screen">
+
+  <div class="card">
+
+    <div class="page-head">
+      <h2>Responses</h2>
+      <p>Answers from your games.</p>
+    </div>
+
+    <div id="responseList">
+      <div class="empty">
+        Create a quiz and share it to receive responses.
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- FIXED BOTTOM NAV -->
+
+<nav class="bottomnav">
+
+  <button class="navitem active" data-screen="home">
+    <span>⌂</span>
+    Home
+  </button>
+
+  <button class="navitem" data-screen="explore">
+    <span>⌕</span>
+    Explore
+  </button>
+
+  <button class="navitem" id="createNav">
+    <span class="create-nav">+</span>
+    Create
+  </button>
+
+  <button class="navitem" data-screen="notifications">
+    <span>🔔</span>
+    Notifications
+  </button>
+
+  <button class="navitem" data-screen="profile">
+    <span>♙</span>
+    Profile
+  </button>
+
+</nav>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-/* =====================================================
-   FINAL EVENT PATCH
-===================================================== */
+const SUPABASE_URL =
+"https://rzbcofckfgnurhnxmgbl.supabase.co";
 
-document.addEventListener(
-  "click",
-  event => {
+const SUPABASE_KEY =
+"sb_publishable_WPGUUlCUn52sH3rvaYoAgg_MCIeDkYZ";
 
-    const target =
-      event.target.closest(
-        "[data-action]"
-      );
-
-    if(!target) return;
-
-    const action =
-      target.dataset.action;
-
-
-    if(action === "shareQuiz"){
-
-      shareQuiz();
-
-    }
-
-
-    if(action === "homeCreate"){
-
-      startCreate("quiz");
-
-    }
-
-  }
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
 
-/* =====================================================
-   INITIAL FINAL CHECK
-===================================================== */
+/* -------------------------
+   STATE
+------------------------- */
 
-(function(){
+let currentUser = null;
+let currentQuiz = null;
+let currentQuizId = null;
+let currentType = "quiz";
 
-  setupLogos();
 
-  updateQuestionCount();
+/* -------------------------
+   HELPERS
+------------------------- */
 
-})();
+const $ = id => document.getElementById(id);
+
+function escapeHTML(value){
+  return String(value || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* -------------------------
+   SCREEN NAVIGATION
+------------------------- */
+
+function showScreen(id){
+
+  document.querySelectorAll(".screen")
+    .forEach(s => s.classList.remove("active"));
+
+  const screen = $(id);
+
+  if(screen){
+    screen.classList.add("active");
+  }
+
+  document.querySelectorAll(".navitem[data-screen]")
+    .forEach(btn => {
+      btn.classList.toggle(
+        "active",
+        btn.dataset.screen === id
+      );
+    });
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+/* -------------------------
+   SUPABASE SESSION
+------------------------- */
+
+async function ensureUser(){
+
+  if(currentUser){
+    return currentUser;
+  }
+
+  const sessionResult =
+    await supabaseClient.auth.getSession();
+
+  currentUser =
+    sessionResult.data.session?.user || null;
+
+  if(!currentUser){
+
+    const result =
+      await supabaseClient.auth.signInAnonymously();
+
+    if(result.error){
+      throw result.error;
+    }
+
+    currentUser = result.data.user;
+  }
+
+  return currentUser;
+}
+
+
+/* -------------------------
+   GAME TYPES
+------------------------- */
+
+const gameTypes = {
+
+  quiz:{
+    title:"Create Quiz",
+    sub:"Test your friends with questions."
+  },
+
+  poll:{
+    title:"Create Poll",
+    sub:"Ask everyone what they think."
+  },
+
+  thisthat:{
+    title:"Create This or That",
+    sub:"Give your friends two choices."
+  },
+
+  personality:{
+    title:"Create Personality",
+    sub:"Discover everyone's type."
+  },
+
+  wouldrather:{
+    title:"Create Would You Rather",
+    sub:"Two choices. One decision."
+  },
+
+  emoji:{
+    title:"Create Emoji Game",
+    sub:"Guess the meaning of emojis."
+  }
+
+};
+
+
+/* -------------------------
+   CREATOR
+------------------------- */
+
+function openCreator(type="quiz"){
+
+  currentType = type;
+
+  const info =
+    gameTypes[type] || gameTypes.quiz;
+
+  $("makerTitle").textContent = info.title;
+  $("makerSub").textContent = info.sub;
+
+  $("gameTitle").value =
+    type === "poll"
+      ? "Quick Poll 📊"
+      : type === "thisthat"
+      ? "This or That ⚡"
+      : type === "personality"
+      ? "Which One Are You? 💫"
+      : type === "emoji"
+      ? "Guess The Emoji 😂"
+      : "My Fun Quiz 💗";
+
+  $("questions").innerHTML = "";
+
+  if(type === "thisthat"){
+    addQuestion(
+      "Choose one!",
+      ["Option A ✨","Option B 💜"]
+    );
+  }
+
+  else if(type === "poll"){
+    addQuestion(
+      "What do you think?",
+      ["Yes 👍","No 👎"]
+    );
+  }
+
+  else if(type === "personality"){
+    addQuestion(
+      "Which describes you?",
+      ["Calm 😌","Funny 😂","Adventurous ⚡","Creative 🎨"]
+    );
+  }
+
+  else if(type === "emoji"){
+    addQuestion(
+      "What does 😂🍕 mean?",
+      ["Pizza Party","Movie Night","School Day","Beach Trip"]
+    );
+  }
+
+  else{
+    addQuestion(
+      "What is your favourite thing?",
+      ["Option A","Option B","Option C"]
+    );
+  }
+
+  $("makerMsg").textContent = "";
+
+  showScreen("maker");
+}
+
+
+function addQuestion(text="",options=["YES 👍","NO 👎"]){
+
+  const box =
+    document.createElement("div");
+
+  box.className = "question-box";
+
+  box.innerHTML = `
+    <div class="q-top">
+      <b class="q-number">Question</b>
+      <button class="xbtn remove-question" type="button">×</button>
+    </div>
+
+    <div class="field">
+      <input class="question-text"
+        placeholder="Write your question"
+        value="${escapeHTML(text)}">
+    </div>
+
+    <div class="options"></div>
+
+    <button class="btn light small add-option" type="button">
+      + Option
+    </button>
+  `;
+
+  const optionsBox =
+    box.querySelector(".options");
+
+  options.forEach(option =>
+    addOption(optionsBox,option)
+  );
+
+  box.querySelector(".remove-question")
+    .addEventListener("click",()=>{
+      box.remove();
+      renumberQuestions();
+    });
+
+  box.querySelector(".add-option")
+    .addEventListener("click",()=>{
+      addOption(optionsBox,"");
+    });
+
+  $("questions").appendChild(box);
+
+  renumberQuestions();
+}
+
+
+function addOption(parent,value=""){
+
+  const row =
+    document.createElement("div");
+
+  row.className = "option-row";
+
+  row.innerHTML = `
+    <input class="option-text"
+      placeholder="Answer option"
+      value="${escapeHTML(value)}">
+
+    <button class="xbtn remove-option"
+      type="button">×</button>
+  `;
+
+  row.querySelector(".remove-option")
+    .addEventListener("click",()=>{
+      row.remove();
+    });
+
+  parent.appendChild(row);
+}
+
+
+function renumberQuestions(){
+
+  document
+    .querySelectorAll(".question-box")
+    .forEach((box,index)=>{
+      box.querySelector(".q-number")
+        .textContent = "Question "+(index+1);
+    });
+}
+
+
+/* -------------------------
+   COLLECT QUIZ
+------------------------- */
+
+function collectQuiz(){
+
+  const title =
+    $("gameTitle").value.trim();
+
+  const boxes =
+    [...document.querySelectorAll(".question-box")];
+
+  const questions =
+    boxes.map(box=>{
+
+      const text =
+        box.querySelector(".question-text")
+          .value.trim();
+
+      const options =
+        [...box.querySelectorAll(".option-text")]
+          .map(x=>x.value.trim())
+          .filter(Boolean);
+
+      return {
+        text,
+        options
+      };
+
+    }).filter(q =>
+      q.text &&
+      q.options.length >= 2
+    );
+
+  return {
+    title:
+      title ||
+      "My FUNVEXA Game",
+
+    type:currentType,
+
+    questions
+  };
+}
+
+
+/* -------------------------
+   ENCODE / DECODE
+------------------------- */
+
+function encodeQuiz(obj){
+
+  const json =
+    JSON.stringify(obj);
+
+  return btoa(
+    unescape(
+      encodeURIComponent(json)
+    )
+  )
+  .replace(/\+/g,"-")
+  .replace(/\//g,"_")
+  .replace(/=+$/,"");
+}
+
+
+function decodeQuiz(str){
+
+  try{
+
+    const base64 =
+      str
+        .replace(/-/g,"+")
+        .replace(/_/g,"/");
+
+    return JSON.parse(
+      decodeURIComponent(
+        escape(atob(base64))
+      )
+    );
+
+  }catch(error){
+
+    return null;
+  }
+}
+
+
+/* -------------------------
+   PUBLISH
+------------------------- */
+
+async function publishQuiz(){
+
+  const quiz =
+    collectQuiz();
+
+  if(!quiz.questions.length){
+
+    $("makerMsg").textContent =
+      "At least one question with two options add karo.";
+
+    return;
+  }
+
+  try{
+
+    $("publishBtn").disabled = true;
+    $("makerMsg").textContent =
+      "Creating your game...";
+
+    const user =
+      await ensureUser();
+
+    const id =
+      Date.now().toString(36) +
+      "-" +
+      Math.random()
+        .toString(36)
+        .slice(2,9);
+
+    const result =
+      await supabaseClient
+        .from("quizzes")
+        .insert({
+          id:id,
+          owner_id:user.id,
+          title:quiz.title
+        });
+
+    if(result.error){
+      throw result.error;
+    }
+
+    currentQuiz = quiz;
+    currentQuizId = id;
+
+    const encoded =
+      encodeQuiz(quiz);
+
+    const link =
+      location.origin +
+      location.pathname +
+      "#quiz=" +
+      encodeURIComponent(id) +
+      "&data=" +
+      encoded;
+
+    $("shareLink").value = link;
+
+    $("makerMsg").textContent = "";
+
+    showScreen("share");
+
+  }catch(error){
+
+    $("makerMsg").textContent =
+      error.message ||
+      "Game create nahi hua.";
+
+  }finally{
+
+    $("publishBtn").disabled = false;
+  }
+}
+
+
+/* -------------------------
+   COPY LINK
+------------------------- */
+
+async function copyLink(){
+
+  const link =
+    $("shareLink").value;
+
+  try{
+
+    await navigator.clipboard.writeText(link);
+
+    $("copyBtn").textContent =
+      "✓ Link Copied!";
+
+    setTimeout(()=>{
+      $("copyBtn").textContent =
+        "📋 Copy Link";
+    },1600);
+
+  }catch(error){
+
+    $("shareLink").select();
+    document.execCommand("copy");
+
+    $("copyBtn").textContent =
+      "✓ Link Copied!";
+  }
+}
+
+
+/* -------------------------
+   LOAD SHARED QUIZ
+------------------------- */
+
+function loadSharedQuiz(){
+
+  const hash =
+    location.hash;
+
+  if(!hash.startsWith("#quiz=")){
+    return;
+  }
+
+  const raw =
+    hash.slice(6);
+
+  const parts =
+    raw.split("&data=");
+
+  const id =
+    decodeURIComponent(parts[0] || "");
+
+  const data =
+    parts[1]
+      ? decodeQuiz(parts[1])
+      : null;
+
+  if(
+    id &&
+    data &&
+    Array.isArray(data.questions) &&
+    data.questions.length
+  ){
+
+    currentQuizId = id;
+
+    renderQuiz(data);
+  }
+}
+
+
+/* -------------------------
+   RENDER QUIZ
+------------------------- */
+
+function renderQuiz(quiz){
+
+  currentQuiz = quiz;
+
+  $("quizMode").textContent =
+    (gameTypes[quiz.type]?.title || "QUIZ")
+      .toUpperCase();
+
+  $("quizTitle").textContent =
+    quiz.title || "FUNVEXA Quiz";
+
+  $("quizDesc").textContent =
+    "Choose your answer.";
+
+  $("quizQuestions").innerHTML =
+    quiz.questions.map((q,index)=>`
+
+      <div class="question-box">
+
+        <div class="q-top">
+          <b>Q${index+1}</b>
+        </div>
+
+        <div style="font-weight:800;margin-bottom:10px">
+          ${escapeHTML(q.text)}
+        </div>
+
+        ${q.options.map(option=>`
+
+          <label class="choice">
+
+            <input
+              type="radio"
+              name="question-${index}"
+              value="${escapeHTML(option)}">
+
+            <span>
+              ${escapeHTML(option)}
+            </span>
+
+          </label>
+
+        `).join("")}
+
+      </div>
+
+    `).join("");
+
+  $("progress").style.width = "0%";
+
+  document
+    .querySelectorAll("#quizQuestions input")
+    .forEach(input=>{
+
+      input.addEventListener("change",updateProgress);
+
+    });
+
+  showScreen("quiz");
+}
+
+
+function updateProgress(){
+
+  if(!currentQuiz) return;
+
+  const total =
+    currentQuiz.questions.length;
+
+  const answered =
+    document.querySelectorAll(
+      "#quizQuestions input:checked"
+    ).length;
+
+  $("progress").style.width =
+    Math.max(
+      5,
+      Math.round((answered/total)*100)
+    ) + "%";
+}
+
+
+/* -------------------------
+   SUBMIT ANSWERS
+------------------------- */
+
+async function submitQuiz(){
+
+  $("submitMsg").textContent = "";
+
+  const name =
+    $("playerName").value.trim();
+
+  if(!name){
+
+    $("submitMsg").textContent =
+      "Pehle naam likho.";
+
+    return;
+  }
+
+  if(!currentQuizId || !currentQuiz){
+
+    $("submitMsg").textContent =
+      "Quiz link invalid hai.";
+
+    return;
+  }
+
+  const answers =
+    currentQuiz.questions.map((q,index)=>({
+
+      question:q.text,
+
+      answer:
+        document.querySelector(
+          `input[name="question-${index}"]:checked`
+        )?.value ||
+        "Not answered"
+
+    }));
+
+  try{
+
+    $("submitBtn").disabled = true;
+
+    const result =
+      await supabaseClient
+        .from("responses")
+        .insert({
+          quiz_id:currentQuizId,
+          name:name,
+          answers:answers
+        });
+
+    if(result.error){
+      throw result.error;
+    }
+
+    showScreen("done");
+
+  }catch(error){
+
+    $("submitMsg").textContent =
+      "Submit nahi hua: " +
+      error.message;
+
+  }finally{
+
+    $("submitBtn").disabled = false;
+  }
+}
+
+
+/* -------------------------
+   PROFILE
+------------------------- */
+
+function loadProfile(){
+
+  try{
+
+    const data =
+      JSON.parse(
+        localStorage.getItem(
+          "funvexa_profile"
+        ) || "null"
+      );
+
+    if(data){
+
+      $("profileName").value =
+        data.name || "";
+
+      $("profileBio").value =
+        data.bio || "";
+
+      $("profileDisplay")
+        .textContent =
+        data.name ||
+        "Guest Creator";
+    }
+
+  }catch(error){}
+}
+
+
+function saveProfile(){
+
+  const name =
+    $("profileName").value.trim();
+
+  const bio =
+    $("profileBio").value.trim();
+
+  localStorage.setItem(
+    "funvexa_profile",
+    JSON.stringify({
+      name:name,
+      bio:bio
+    })
+  );
+
+  $("profileDisplay")
+    .textContent =
+    name || "Guest Creator";
+
+  $("profileMsg").textContent =
+    "Profile saved on this device. 💗";
+
+}
+
+
+/* -------------------------
+   EVENTS
+------------------------- */
+
+document
+  .querySelectorAll(".navitem[data-screen]")
+  .forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      showScreen(
+        button.dataset.screen
+      );
+
+    });
+
+  });
+
+
+$("createNav")
+  .addEventListener("click",()=>{
+    showScreen("create");
+  });
+
+
+$("createHero")
+  .addEventListener("click",()=>{
+    showScreen("create");
+  });
+
+
+document
+  .querySelectorAll("[data-create]")
+  .forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      openCreator(
+        button.dataset.create
+      );
+
+    });
+
+  });
+
+
+$("addQuestion")
+  .addEventListener("click",()=>{
+
+    if(
+      document.querySelectorAll(
+        ".question-box"
+      ).length >= 15
+    ){
+
+      $("makerMsg").textContent =
+        "Maximum 15 questions.";
+
+      return;
+    }
+
+    addQuestion();
+
+  });
+
+
+$("publishBtn")
+  .addEventListener(
+    "click",
+    publishQuiz
+  );
+
+
+$("copyBtn")
+  .addEventListener(
+    "click",
+    copyLink
+  );
+
+
+$("submitBtn")
+  .addEventListener(
+    "click",
+    submitQuiz
+  );
+
+
+$("saveProfile")
+  .addEventListener(
+    "click",
+    saveProfile
+  );
+
+
+$("bellBtn")
+  .addEventListener("click",()=>{
+
+    showScreen("notifications");
+
+  });
+
+
+$("homeAfterShare")
+  .addEventListener("click",()=>{
+
+    showScreen("home");
+
+  });
+
+
+$("doneHome")
+  .addEventListener("click",()=>{
+
+    history.replaceState(
+      null,
+      "",
+      location.pathname
+    );
+
+    showScreen("home");
+
+  });
+
+
+/* -------------------------
+   START
+------------------------- */
+
+loadProfile();
+loadSharedQuiz();
+
 </script>
 
-</div>
 </body>
 </html>
